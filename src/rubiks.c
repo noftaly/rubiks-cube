@@ -237,17 +237,17 @@ void free_cube() {
 char* to_char(Color color) {
     switch (color) {
         case GREEN:
-            return "G";
+            return "\e[0;32mG\e[0m";
         case RED:
-            return "R";
+            return "\e[0;31mR\e[0m";
         case YELLOW:
-            return "Y";
+            return "\e[0;33mY\e[0m";
         case BLUE:
-            return "B";
+            return "\e[0;34mB\e[0m";
         case WHITE:
-            return "W";
+            return "\e[0;37mW\e[0m";
         case ORANGE:
-            return "O";
+            return "\e[0;95mO\e[0m";
     }
 }
 
