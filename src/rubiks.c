@@ -27,7 +27,7 @@ void rfacerotate(Cube matrix[3][3]) {
     swap_cubes(&matrix[0][1], &matrix[1][2]);
 }
 
-void strarrswap(Cube matrix[3][3], char* rc, Cube matrix1[3][3], char* rc1) {
+void swap_faces(Cube matrix[3][3], char* rc, Cube matrix1[3][3], char* rc1) {
     int cr = *(rc + 1) - '0'; // 0
     int cr1 = *(rc1 + 1) - '0'; // 2
 
@@ -53,100 +53,100 @@ void strarrswap(Cube matrix[3][3], char* rc, Cube matrix1[3][3], char* rc1) {
 void rotate_front() {
     swap_cubes(&left.colors[0][2], &left.colors[2][2]);
     swap_cubes(&right.colors[0][0], &right.colors[2][0]);
-    strarrswap(down.colors, (char* ) "r0", left.colors, (char* ) "c2");
-    strarrswap(down.colors, (char* ) "r0", up.colors, (char* ) "r2");
-    strarrswap(down.colors, (char* ) "r0", right.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "r0", left.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "r0", up.colors, (char* ) "r2");
+    swap_faces(down.colors, (char* ) "r0", right.colors, (char* ) "c0");
     facerotate(front.colors);
 }
 
 void rotate_right() {
-    strarrswap(down.colors, (char* ) "c2", front.colors, (char* ) "c2");
-    strarrswap(down.colors, (char* ) "c2", up.colors, (char* ) "c2");
-    strarrswap(down.colors, (char* ) "c2", back.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "c2", front.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "c2", up.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "c2", back.colors, (char* ) "c2");
     facerotate(right.colors);
 }
 
 void rotate_left() {
-    strarrswap(down.colors, (char* ) "c0", back.colors, (char* ) "c0");
-    strarrswap(down.colors, (char* ) "c0", up.colors, (char* ) "c0");
-    strarrswap(down.colors, (char* ) "c0", front.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "c0", back.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "c0", up.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "c0", front.colors, (char* ) "c0");
     facerotate(left.colors);
 }
 
 void rotate_up() {
     swap_cubes(&back.colors[2][0], &back.colors[2][2]);
     swap_cubes(&left.colors[0][0], &left.colors[0][2]);
-    strarrswap(front.colors, (char* ) "r0", left.colors, (char* ) "r0");
-    strarrswap(front.colors, (char* ) "r0", back.colors, (char* ) "r2");
-    strarrswap(front.colors, (char* ) "r0", right.colors, (char* ) "r0");
+    swap_faces(front.colors, (char* ) "r0", left.colors, (char* ) "r0");
+    swap_faces(front.colors, (char* ) "r0", back.colors, (char* ) "r2");
+    swap_faces(front.colors, (char* ) "r0", right.colors, (char* ) "r0");
     facerotate(up.colors);
 }
 
 void rotate_down() {
     swap_cubes(&back.colors[0][0], &back.colors[0][2]);
     swap_cubes(&right.colors[2][0], &right.colors[2][2]);
-    strarrswap(front.colors, (char* ) "r2", right.colors, (char* ) "r2");
-    strarrswap(front.colors, (char* ) "r2", back.colors, (char* ) "r0");
-    strarrswap(front.colors, (char* ) "r2", left.colors, (char* ) "r2");
+    swap_faces(front.colors, (char* ) "r2", right.colors, (char* ) "r2");
+    swap_faces(front.colors, (char* ) "r2", back.colors, (char* ) "r0");
+    swap_faces(front.colors, (char* ) "r2", left.colors, (char* ) "r2");
     facerotate(down.colors);
 }
 
 void rotate_back() {
     swap_cubes(&up.colors[0][0], &up.colors[0][2]);
     swap_cubes(&down.colors[2][0], &down.colors[2][2]);
-    strarrswap(down.colors, (char* ) "r2", right.colors, (char* ) "c2");
-    strarrswap(down.colors, (char* ) "r2", up.colors, (char* ) "r0");
-    strarrswap(down.colors, (char* ) "r2", left.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "r2", right.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "r2", up.colors, (char* ) "r0");
+    swap_faces(down.colors, (char* ) "r2", left.colors, (char* ) "c0");
     rfacerotate(back.colors);
 }
 
 void rotate_front_reverse() {
     swap_cubes(&up.colors[2][0], &up.colors[2][2]);
     swap_cubes(&down.colors[0][0], &down.colors[0][2]);
-    strarrswap(down.colors, (char* ) "r0", right.colors, (char* ) "c0");
-    strarrswap(down.colors, (char* ) "r0", up.colors, (char* ) "r2");
-    strarrswap(down.colors, (char* ) "r0", left.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "r0", right.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "r0", up.colors, (char* ) "r2");
+    swap_faces(down.colors, (char* ) "r0", left.colors, (char* ) "c2");
     rfacerotate(front.colors);
 }
 
 void rotate_right_reverse() {
-    strarrswap(down.colors, (char* ) "c2", back.colors, (char* ) "c2");
-    strarrswap(down.colors, (char* ) "c2", up.colors, (char* ) "c2");
-    strarrswap(down.colors, (char* ) "c2", front.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "c2", back.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "c2", up.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "c2", front.colors, (char* ) "c2");
     rfacerotate(right.colors);
 }
 
 void rotate_left_reverse() {
-    strarrswap(down.colors, (char* ) "c0", front.colors, (char* ) "c0");
-    strarrswap(down.colors, (char* ) "c0", up.colors, (char* ) "c0");
-    strarrswap(down.colors, (char* ) "c0", back.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "c0", front.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "c0", up.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "c0", back.colors, (char* ) "c0");
     rfacerotate(left.colors);
 }
 
 void rotate_up_reverse() {
     swap_cubes(&back.colors[2][0], &back.colors[2][2]);
     swap_cubes(&right.colors[0][0], &right.colors[0][2]);
-    strarrswap(front.colors, (char* ) "r0", right.colors, (char* ) "r0");
-    strarrswap(front.colors, (char* ) "r0", back.colors, (char* ) "r2");
-    strarrswap(front.colors, (char* ) "r0", left.colors, (char* ) "r0");
+    swap_faces(front.colors, (char* ) "r0", right.colors, (char* ) "r0");
+    swap_faces(front.colors, (char* ) "r0", back.colors, (char* ) "r2");
+    swap_faces(front.colors, (char* ) "r0", left.colors, (char* ) "r0");
     rfacerotate(up.colors);
 }
 
 void rotate_down_reverse() {
     swap_cubes(&back.colors[0][0], &back.colors[0][2]);
     swap_cubes(&left.colors[2][0], &left.colors[2][2]);
-    strarrswap(front.colors, (char* ) "r2", left.colors, (char* ) "r2");
-    strarrswap(front.colors, (char* ) "r2", back.colors, (char* ) "r0");
-    strarrswap(front.colors, (char* ) "r2", right.colors, (char* ) "r2");
+    swap_faces(front.colors, (char* ) "r2", left.colors, (char* ) "r2");
+    swap_faces(front.colors, (char* ) "r2", back.colors, (char* ) "r0");
+    swap_faces(front.colors, (char* ) "r2", right.colors, (char* ) "r2");
     rfacerotate(down.colors);
 }
 
 void rotate_back_reverse() {
     swap_cubes(&right.colors[0][2], &right.colors[2][2]);
     swap_cubes(&left.colors[0][0], &left.colors[2][0]);
-    strarrswap(down.colors, (char* ) "r2", left.colors, (char* ) "c0");
-    strarrswap(down.colors, (char* ) "r2", up.colors, (char* ) "r0");
-    strarrswap(down.colors, (char* ) "r2", right.colors, (char* ) "c2");
+    swap_faces(down.colors, (char* ) "r2", left.colors, (char* ) "c0");
+    swap_faces(down.colors, (char* ) "r2", up.colors, (char* ) "r0");
+    swap_faces(down.colors, (char* ) "r2", right.colors, (char* ) "c2");
     rfacerotate(back.colors);
 }
 
