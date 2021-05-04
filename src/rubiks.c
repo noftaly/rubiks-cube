@@ -219,10 +219,10 @@ void run_move(const char* move) {
 void create_cube() {
     create_face(front.colors, GREEN);
     create_face(back.colors, BLUE);
-    create_face(down.colors, WHITE);
-    create_face(up.colors, YELLOW);
-    create_face(left.colors, RED);
-    create_face(right.colors, ORANGE);
+    create_face(down.colors, YELLOW);
+    create_face(up.colors, WHITE);
+    create_face(left.colors, ORANGE);
+    create_face(right.colors, RED);
 }
 
 void free_cube() {
