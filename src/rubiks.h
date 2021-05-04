@@ -46,3 +46,5 @@ void create_cube();
 void free_cube();
 
 void display_cube();
+
+void scramble_cube();

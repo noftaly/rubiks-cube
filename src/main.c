@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "rubiks.h"
 
 int main() {
+    srand(time(NULL));
+
     create_cube();
     display_cube();
     char input[100];
@@ -11,6 +15,8 @@ int main() {
         scanf("%s", input);
         if (strcmp(input, "reset") == 0)
             create_cube();
+        else if (strcmp(input, "scramble") == 0)
+            scramble_cube();
         else
             run_move(input);
         display_cube();

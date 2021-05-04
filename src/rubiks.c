@@ -279,3 +279,14 @@ void display_cube() {
     printf("          %s  %s  %s\n", to_char(down.colors[0][0].color), to_char(down.colors[0][1].color), to_char(down.colors[0][2].color));
     printf("          %s  %s  %s\n", to_char(down.colors[2][0].color), to_char(down.colors[2][1].color), to_char(down.colors[2][2].color));
 }
+
+void scramble_cube() {
+    char* moves[] = { "U", "U'", "R", "R'", "L", "L'", "D", "D'", "F", "F'", "B", "B'" };
+    int total_moves = 12;
+
+    int scramble_time = (rand() % 20) + 10;
+    for (int i = 0; i < scramble_time; i++) {
+        char* random_move = moves[rand() % total_moves];
+        run_move(random_move);
+    }
+}
