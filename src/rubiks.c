@@ -10,21 +10,14 @@ void swap_cubes(Cube* source, Cube* dest) {
 }
 
 void facerotate(Cube matrix[3][3]) {
+    // Rotate corners
     swap_cubes(&matrix[0][0], &matrix[0][2]);
     swap_cubes(&matrix[0][0], &matrix[2][2]);
     swap_cubes(&matrix[0][0], &matrix[2][0]);
+    // Rotate edges
     swap_cubes(&matrix[0][1], &matrix[1][2]);
     swap_cubes(&matrix[0][1], &matrix[2][1]);
     swap_cubes(&matrix[0][1], &matrix[1][0]);
-}
-
-void rfacerotate(Cube matrix[3][3]) {
-    swap_cubes(&matrix[0][0], &matrix[2][0]);
-    swap_cubes(&matrix[0][0], &matrix[2][2]);
-    swap_cubes(&matrix[0][0], &matrix[0][2]);
-    swap_cubes(&matrix[0][1], &matrix[1][0]);
-    swap_cubes(&matrix[0][1], &matrix[2][1]);
-    swap_cubes(&matrix[0][1], &matrix[1][2]);
 }
 
 void swap_faces(Cube matrix[3][3], char* rc, Cube matrix1[3][3], char* rc1) {
@@ -97,57 +90,7 @@ void rotate_back() {
     swap_faces(down.colors, (char*) "r2", right.colors, (char*) "c2");
     swap_faces(down.colors, (char*) "r2", up.colors, (char*) "r0");
     swap_faces(down.colors, (char*) "r2", left.colors, (char*) "c0");
-    rfacerotate(back.colors);
-}
-
-void rotate_front_reverse() {
-    swap_cubes(&up.colors[2][0], &up.colors[2][2]);
-    swap_cubes(&down.colors[0][0], &down.colors[0][2]);
-    swap_faces(down.colors, (char*) "r0", right.colors, (char*) "c0");
-    swap_faces(down.colors, (char*) "r0", up.colors, (char*) "r2");
-    swap_faces(down.colors, (char*) "r0", left.colors, (char*) "c2");
-    rfacerotate(front.colors);
-}
-
-void rotate_right_reverse() {
-    swap_faces(down.colors, (char*) "c2", back.colors, (char*) "c2");
-    swap_faces(down.colors, (char*) "c2", up.colors, (char*) "c2");
-    swap_faces(down.colors, (char*) "c2", front.colors, (char*) "c2");
-    rfacerotate(right.colors);
-}
-
-void rotate_left_reverse() {
-    swap_faces(down.colors, (char*) "c0", front.colors, (char*) "c0");
-    swap_faces(down.colors, (char*) "c0", up.colors, (char*) "c0");
-    swap_faces(down.colors, (char*) "c0", back.colors, (char*) "c0");
-    rfacerotate(left.colors);
-}
-
-void rotate_up_reverse() {
-    swap_cubes(&back.colors[2][0], &back.colors[2][2]);
-    swap_cubes(&right.colors[0][0], &right.colors[0][2]);
-    swap_faces(front.colors, (char*) "r0", right.colors, (char*) "r0");
-    swap_faces(front.colors, (char*) "r0", back.colors, (char*) "r2");
-    swap_faces(front.colors, (char*) "r0", left.colors, (char*) "r0");
-    rfacerotate(up.colors);
-}
-
-void rotate_down_reverse() {
-    swap_cubes(&back.colors[0][0], &back.colors[0][2]);
-    swap_cubes(&left.colors[2][0], &left.colors[2][2]);
-    swap_faces(front.colors, (char*) "r2", left.colors, (char*) "r2");
-    swap_faces(front.colors, (char*) "r2", back.colors, (char*) "r0");
-    swap_faces(front.colors, (char*) "r2", right.colors, (char*) "r2");
-    rfacerotate(down.colors);
-}
-
-void rotate_back_reverse() {
-    swap_cubes(&right.colors[0][2], &right.colors[2][2]);
-    swap_cubes(&left.colors[0][0], &left.colors[2][0]);
-    swap_faces(down.colors, (char*) "r2", left.colors, (char*) "c0");
-    swap_faces(down.colors, (char*) "r2", up.colors, (char*) "r0");
-    swap_faces(down.colors, (char*) "r2", right.colors, (char*) "c2");
-    rfacerotate(back.colors);
+    facerotate(back.colors);
 }
 
 void create_face(Cube matrix[3][3], Color color) {
@@ -172,22 +115,34 @@ void run_move(const char* move) {
         if (move[i + 1] == '\'') {
             switch (move[i]) {
                 case 'R': case 'r':
-                    rotate_right_reverse();
+                    rotate_right();
+                    rotate_right();
+                    rotate_right();
                     break;
                 case 'L': case 'l':
-                    rotate_left_reverse();
+                    rotate_left();
+                    rotate_left();
+                    rotate_left();
                     break;
                 case 'U': case 'u':
-                    rotate_up_reverse();
+                    rotate_up();
+                    rotate_up();
+                    rotate_up();
                     break;
                 case 'D': case 'd':
-                    rotate_down_reverse();
+                    rotate_down();
+                    rotate_down();
+                    rotate_down();
                     break;
                 case 'F': case 'f':
-                    rotate_front_reverse();
+                    rotate_front();
+                    rotate_front();
+                    rotate_front();
                     break;
                 case 'B': case 'b':
-                    rotate_back_reverse();
+                    rotate_back();
+                    rotate_back();
+                    rotate_back();
                     break;
             }
             i++;
@@ -275,8 +230,8 @@ void display_cube() {
         to_char(back.colors[2][0].color), to_char(back.colors[2][1].color), to_char(back.colors[2][2].color)
     );
 
-    printf("          %s  %s  %s\n", to_char(down.colors[1][0].color), to_char(down.colors[1][1].color), to_char(down.colors[1][2].color));
     printf("          %s  %s  %s\n", to_char(down.colors[0][0].color), to_char(down.colors[0][1].color), to_char(down.colors[0][2].color));
+    printf("          %s  %s  %s\n", to_char(down.colors[1][0].color), to_char(down.colors[1][1].color), to_char(down.colors[1][2].color));
     printf("          %s  %s  %s\n", to_char(down.colors[2][0].color), to_char(down.colors[2][1].color), to_char(down.colors[2][2].color));
 }
 
