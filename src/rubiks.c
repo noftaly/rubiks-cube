@@ -53,34 +53,134 @@ void rotate_front() {
 }
 
 void rotate_right() {
-    swap_faces(down.colors, (char*) "c2", front.colors, (char*) "c2");
-    swap_faces(down.colors, (char*) "c2", up.colors, (char*) "c2");
-    swap_faces(down.colors, (char*) "c2", back.colors, (char*) "c2");
+    Cube temp, temp2;
+
+    // Rotate top corner
+    temp = up.colors[0][2];
+    up.colors[0][2] = front.colors[0][2];
+    temp2 = back.colors[2][0];
+    back.colors[2][0] = temp;
+    temp = down.colors[0][2];
+    down.colors[0][2] = temp2;
+    front.colors[0][2] = temp;
+
+    // Rotate middle corner
+    temp = up.colors[1][2];
+    up.colors[1][2] = front.colors[1][2];
+    temp2 = back.colors[1][0];
+    back.colors[1][0] = temp;
+    temp = down.colors[1][2];
+    down.colors[1][2] = temp2;
+    front.colors[1][2] = temp;
+
+    // Rotate bottom corner
+    temp = up.colors[2][2];
+    up.colors[2][2] = front.colors[2][2];
+    temp2 = back.colors[0][0];
+    back.colors[0][0] = temp;
+    temp = down.colors[2][2];
+    down.colors[2][2] = temp2;
+    front.colors[2][2] = temp;
+
     facerotate(right.colors);
 }
 
 void rotate_left() {
-    swap_faces(down.colors, (char*) "c0", back.colors, (char*) "c0");
-    swap_faces(down.colors, (char*) "c0", up.colors, (char*) "c0");
-    swap_faces(down.colors, (char*) "c0", front.colors, (char*) "c0");
+    Cube temp, temp2;
+
+    // Rotate top corner
+    temp = down.colors[0][0];
+    down.colors[0][0] = front.colors[0][0];
+    temp2 = back.colors[2][2];
+    back.colors[2][2] = temp;
+    temp = up.colors[0][0];
+    up.colors[0][0] = temp2;
+    front.colors[0][0] = temp;
+
+    // Rotate middle corner
+    temp = down.colors[1][0];
+    down.colors[1][0] = front.colors[1][0];
+    temp2 = back.colors[1][2];
+    back.colors[1][2] = temp;
+    temp = up.colors[1][0];
+    up.colors[1][0] = temp2;
+    front.colors[1][0] = temp;
+
+    // Rotate bottom corner
+    temp = down.colors[2][0];
+    down.colors[2][0] = front.colors[2][0];
+    temp2 = back.colors[0][2];
+    back.colors[0][2] = temp;
+    temp = up.colors[2][0];
+    up.colors[2][0] = temp2;
+    front.colors[2][0] = temp;
+
     facerotate(left.colors);
 }
 
 void rotate_up() {
-    swap_cubes(&back.colors[2][0], &back.colors[2][2]);
-    swap_cubes(&left.colors[0][0], &left.colors[0][2]);
-    swap_faces(front.colors, (char*) "r0", left.colors, (char*) "r0");
-    swap_faces(front.colors, (char*) "r0", back.colors, (char*) "r2");
-    swap_faces(front.colors, (char*) "r0", right.colors, (char*) "r0");
+    Cube temp, temp2;
+
+    // Rotate top corner
+    temp = left.colors[0][0];
+    left.colors[0][0] = front.colors[0][0];
+    temp2 = back.colors[0][0];
+    back.colors[0][0] = temp;
+    temp = right.colors[0][0];
+    right.colors[0][0] = temp2;
+    front.colors[0][0] = temp;
+
+    // Rotate middle corner
+    temp = left.colors[0][1];
+    left.colors[0][1] = front.colors[0][1];
+    temp2 = back.colors[0][1];
+    back.colors[0][1] = temp;
+    temp = right.colors[0][1];
+    right.colors[0][1] = temp2;
+    front.colors[0][1] = temp;
+
+    // Rotate bottom corner
+    temp = left.colors[0][2];
+    left.colors[0][2] = front.colors[0][2];
+    temp2 = back.colors[0][2];
+    back.colors[0][2] = temp;
+    temp = right.colors[0][2];
+    right.colors[0][2] = temp2;
+    front.colors[0][2] = temp;
+
     facerotate(up.colors);
 }
 
 void rotate_down() {
-    swap_cubes(&back.colors[0][0], &back.colors[0][2]);
-    swap_cubes(&right.colors[2][0], &right.colors[2][2]);
-    swap_faces(front.colors, (char*) "r2", right.colors, (char*) "r2");
-    swap_faces(front.colors, (char*) "r2", back.colors, (char*) "r2");
-    swap_faces(front.colors, (char*) "r2", left.colors, (char*) "r2");
+    Cube temp, temp2;
+
+    // Rotate top corner
+    temp = right.colors[2][0];
+    right.colors[2][0] = front.colors[2][0];
+    temp2 = back.colors[2][0];
+    back.colors[2][0] = temp;
+    temp = left.colors[2][0];
+    left.colors[2][0] = temp2;
+    front.colors[2][0] = temp;
+
+    // Rotate middle corner
+    temp = right.colors[2][1];
+    right.colors[2][1] = front.colors[2][1];
+    temp2 = back.colors[2][1];
+    back.colors[2][1] = temp;
+    temp = left.colors[2][1];
+    left.colors[2][1] = temp2;
+    front.colors[2][1] = temp;
+
+    // Rotate bottom corner
+    temp = right.colors[2][2];
+    right.colors[2][2] = front.colors[2][2];
+    temp2 = back.colors[2][2];
+    back.colors[2][2] = temp;
+    temp = left.colors[2][2];
+    left.colors[2][2] = temp2;
+    front.colors[2][2] = temp;
+
     facerotate(down.colors);
 }
 
