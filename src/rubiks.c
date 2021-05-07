@@ -238,13 +238,15 @@ void display_cube() {
 void scramble_cube() {
     char* moves[] = { "U", "U'", "R", "R'", "L", "L'", "D", "D'", "F", "F'", "B", "B'" };
     int total_moves = 12;
-    char scramble[64];
+
+    printf("Scramble pattern: ");
 
     int scramble_time = (rand() % 20) + 10;
     for (int i = 0; i < scramble_time; i++) {
         char* random_move = moves[rand() % total_moves];
         run_move(random_move);
-        strcat(scramble, random_move);
+        printf("%s ", random_move);
     }
-    printf("Scramble: %s\n", scramble);
+
+    printf("\n\n");
 }
