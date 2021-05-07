@@ -350,3 +350,22 @@ void scramble_cube() {
 
     printf("\n\n");
 }
+
+void make_white_cross() {}
+void place_corners() {}
+void solve_crown() {}
+void make_yellow_cross() {}
+void place_yellow_edges() {}
+void place_yellow_corners() {}
+void solve_yellow_corners() {}
+
+void solve_cube() {
+    make_white_cross();
+    place_corners();
+    solve_crown();
+    
+    make_yellow_cross();
+    place_yellow_edges();
+    place_yellow_corners();
+    solve_yellow_corners();
+}

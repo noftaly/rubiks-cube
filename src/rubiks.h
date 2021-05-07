@@ -40,3 +40,12 @@ void free_cube();
 void display_cube();
 
 void scramble_cube();
+
+void solve_cube();
+void make_white_cross();
+void place_corners();
+void solve_crown();
+void make_yellow_cross();
+void place_yellow_edges();
+void place_yellow_corners();
+void solve_yellow_corners();
