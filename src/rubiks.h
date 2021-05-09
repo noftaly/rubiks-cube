@@ -29,6 +29,7 @@ void rotate_down();
 void rotate_left();
 void rotate_right();
 void rotate_up();
+void rotate_cube();
 
 void create_face(Cube matrix[3][3], Color);
 void free_face(Cube matrix[3][3]);

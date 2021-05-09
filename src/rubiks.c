@@ -193,6 +193,18 @@ void rotate_back() {
     rotate_main_face(back.colors);
 }
 
+void rotate_cube() {
+    Face temp = right;
+    right = front;
+    front = left;
+    left = back;
+    back = temp;
+    rotate_main_face(up.colors);
+    rotate_main_face(up.colors);
+    rotate_main_face(up.colors);
+    rotate_main_face(down.colors);
+}
+
 void create_face(Cube matrix[3][3], Color color) {
     for (int r = 0; r < 3; ++r) {
         for (int c = 0; c < 3; ++c) {
@@ -244,6 +256,11 @@ void run_move(const char* move) {
                     rotate_back();
                     rotate_back();
                     break;
+                case 'Z': case 'z':
+                    rotate_cube();
+                    rotate_cube();
+                    rotate_cube();
+                    break;
             }
             i++;
         } else {
@@ -265,6 +282,9 @@ void run_move(const char* move) {
                     break;
                 case 'B': case 'b':
                     rotate_back();
+                    break;
+                case 'Z': case 'z':
+                    rotate_cube();
                     break;
             }
         }
