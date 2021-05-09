@@ -9,7 +9,7 @@ void swap_cubes(Cube* source, Cube* dest) {
     *dest = temp;
 }
 
-void facerotate(Cube matrix[3][3]) {
+void rotate_main_face(Cube matrix[3][3]) {
     // Rotate corners
     swap_cubes(&matrix[0][0], &matrix[0][2]);
     swap_cubes(&matrix[0][0], &matrix[2][2]);
@@ -49,7 +49,7 @@ void rotate_front() {
     swap_faces(down.colors, (char*) "r0", left.colors, (char*) "c2");
     swap_faces(down.colors, (char*) "r0", up.colors, (char*) "r2");
     swap_faces(down.colors, (char*) "r0", right.colors, (char*) "c0");
-    facerotate(front.colors);
+    rotate_main_face(front.colors);
 }
 
 void rotate_right() {
@@ -82,7 +82,7 @@ void rotate_right() {
     down.colors[2][2] = temp2;
     front.colors[2][2] = temp;
 
-    facerotate(right.colors);
+    rotate_main_face(right.colors);
 }
 
 void rotate_left() {
@@ -115,7 +115,7 @@ void rotate_left() {
     up.colors[2][0] = temp2;
     front.colors[2][0] = temp;
 
-    facerotate(left.colors);
+    rotate_main_face(left.colors);
 }
 
 void rotate_up() {
@@ -148,7 +148,7 @@ void rotate_up() {
     right.colors[0][2] = temp2;
     front.colors[0][2] = temp;
 
-    facerotate(up.colors);
+    rotate_main_face(up.colors);
 }
 
 void rotate_down() {
@@ -181,7 +181,7 @@ void rotate_down() {
     left.colors[2][2] = temp2;
     front.colors[2][2] = temp;
 
-    facerotate(down.colors);
+    rotate_main_face(down.colors);
 }
 
 void rotate_back() {
@@ -190,7 +190,7 @@ void rotate_back() {
     swap_faces(down.colors, (char*) "r2", right.colors, (char*) "c2");
     swap_faces(down.colors, (char*) "r2", up.colors, (char*) "r0");
     swap_faces(down.colors, (char*) "r2", left.colors, (char*) "c0");
-    facerotate(back.colors);
+    rotate_main_face(back.colors);
 }
 
 void create_face(Cube matrix[3][3], Color color) {
