@@ -21,7 +21,7 @@ void rotate_main_face(Cube matrix[3][3]) {
 }
 
 void rotate_front() {
-    Cube temp, temp2;
+    Cube temp;
 
     // Rotate top corner
     temp = up.colors[2][0];
@@ -48,139 +48,115 @@ void rotate_front() {
 }
 
 void rotate_right() {
-    Cube temp, temp2;
+    Cube temp;
 
     // Rotate top corner
     temp = up.colors[0][2];
     up.colors[0][2] = front.colors[0][2];
-    temp2 = back.colors[2][0];
+    front.colors[0][2] = down.colors[0][2];
+    down.colors[0][2] = back.colors[2][0];
     back.colors[2][0] = temp;
-    temp = down.colors[0][2];
-    down.colors[0][2] = temp2;
-    front.colors[0][2] = temp;
 
     // Rotate middle corner
     temp = up.colors[1][2];
     up.colors[1][2] = front.colors[1][2];
-    temp2 = back.colors[1][0];
+    front.colors[1][2] = down.colors[1][2];
+    down.colors[1][2] = back.colors[1][0];
     back.colors[1][0] = temp;
-    temp = down.colors[1][2];
-    down.colors[1][2] = temp2;
-    front.colors[1][2] = temp;
 
     // Rotate bottom corner
     temp = up.colors[2][2];
     up.colors[2][2] = front.colors[2][2];
-    temp2 = back.colors[0][0];
+    front.colors[2][2] = down.colors[2][2];
+    down.colors[2][2] = back.colors[0][0];
     back.colors[0][0] = temp;
-    temp = down.colors[2][2];
-    down.colors[2][2] = temp2;
-    front.colors[2][2] = temp;
 
     rotate_main_face(right.colors);
 }
 
 void rotate_left() {
-    Cube temp, temp2;
+    Cube temp;
 
     // Rotate top corner
     temp = down.colors[0][0];
     down.colors[0][0] = front.colors[0][0];
-    temp2 = back.colors[2][2];
+    front.colors[0][0] = up.colors[0][0];
+    up.colors[0][0] = back.colors[2][2];
     back.colors[2][2] = temp;
-    temp = up.colors[0][0];
-    up.colors[0][0] = temp2;
-    front.colors[0][0] = temp;
 
     // Rotate middle corner
     temp = down.colors[1][0];
     down.colors[1][0] = front.colors[1][0];
-    temp2 = back.colors[1][2];
+    front.colors[1][0] = up.colors[1][0];
+    up.colors[1][0] = back.colors[1][2];
     back.colors[1][2] = temp;
-    temp = up.colors[1][0];
-    up.colors[1][0] = temp2;
-    front.colors[1][0] = temp;
 
     // Rotate bottom corner
     temp = down.colors[2][0];
     down.colors[2][0] = front.colors[2][0];
-    temp2 = back.colors[0][2];
+    front.colors[2][0] = up.colors[2][0];
+    up.colors[2][0] = back.colors[0][2];
     back.colors[0][2] = temp;
-    temp = up.colors[2][0];
-    up.colors[2][0] = temp2;
-    front.colors[2][0] = temp;
 
     rotate_main_face(left.colors);
 }
 
 void rotate_up() {
-    Cube temp, temp2;
+    Cube temp;
 
     // Rotate top corner
     temp = left.colors[0][0];
     left.colors[0][0] = front.colors[0][0];
-    temp2 = back.colors[0][0];
+    front.colors[0][0] = right.colors[0][0];
+    right.colors[0][0] = back.colors[0][0];
     back.colors[0][0] = temp;
-    temp = right.colors[0][0];
-    right.colors[0][0] = temp2;
-    front.colors[0][0] = temp;
 
     // Rotate middle corner
     temp = left.colors[0][1];
     left.colors[0][1] = front.colors[0][1];
-    temp2 = back.colors[0][1];
+    front.colors[0][1] = right.colors[0][1];
+    right.colors[0][1] = back.colors[0][1];
     back.colors[0][1] = temp;
-    temp = right.colors[0][1];
-    right.colors[0][1] = temp2;
-    front.colors[0][1] = temp;
 
     // Rotate bottom corner
     temp = left.colors[0][2];
     left.colors[0][2] = front.colors[0][2];
-    temp2 = back.colors[0][2];
+    front.colors[0][2] = right.colors[0][2];
+    right.colors[0][2] = back.colors[0][2];
     back.colors[0][2] = temp;
-    temp = right.colors[0][2];
-    right.colors[0][2] = temp2;
-    front.colors[0][2] = temp;
 
     rotate_main_face(up.colors);
 }
 
 void rotate_down() {
-    Cube temp, temp2;
+    Cube temp;
 
     // Rotate top corner
     temp = right.colors[2][0];
     right.colors[2][0] = front.colors[2][0];
-    temp2 = back.colors[2][0];
+    front.colors[2][0] = left.colors[2][0];
+    left.colors[2][0] = back.colors[2][0];
     back.colors[2][0] = temp;
-    temp = left.colors[2][0];
-    left.colors[2][0] = temp2;
-    front.colors[2][0] = temp;
 
     // Rotate middle corner
     temp = right.colors[2][1];
     right.colors[2][1] = front.colors[2][1];
-    temp2 = back.colors[2][1];
+    front.colors[2][1] = left.colors[2][1];
+    left.colors[2][1] = back.colors[2][1];
     back.colors[2][1] = temp;
-    temp = left.colors[2][1];
-    left.colors[2][1] = temp2;
-    front.colors[2][1] = temp;
 
     // Rotate bottom corner
     temp = right.colors[2][2];
     right.colors[2][2] = front.colors[2][2];
-    temp2 = back.colors[2][2];
+    front.colors[2][2] = left.colors[2][2];
+    left.colors[2][2] = back.colors[2][2];
     back.colors[2][2] = temp;
-    temp = left.colors[2][2];
-    left.colors[2][2] = temp2;
-    front.colors[2][2] = temp;
 
     rotate_main_face(down.colors);
 }
 
 void rotate_back() {
-    Cube temp, temp2;
+    Cube temp;
 
     // Rotate top corner
     temp = up.colors[0][0];
