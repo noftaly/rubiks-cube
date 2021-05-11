@@ -397,7 +397,55 @@ void scramble_cube(Face faces[6]) {
     printf("\n\n");
 }
 
-void make_white_cross() {}
+void make_white_cross(Face faces[6]) {
+    int i, j;
+    if (faces[3].colors[0][1].color==WHITE 
+        && faces[3].colors[1][0].color==WHITE 
+        && faces[3].colors[1][2].color==WHITE
+        && faces[3].colors[1][1].color==WHITE
+        && faces[3].colors[2][1].color==GREEN 
+        && faces[0].colors[0][1].color==WHITE
+        && faces[0].colors[1][1].color==GREEN
+        && faces[5].colors[0][1].color==RED
+        && faces[5].colors[1][1].color==RED) {
+        run_move("FU'RU",faces);
+    }
+        if (faces[3].colors[0][1].color==WHITE 
+        && faces[3].colors[1][0].color==WHITE 
+        && faces[3].colors[1][2].color==WHITE 
+        && faces[0].colors[1][1].color==GREEN
+        && faces[0].colors[2][1].color==WHITE 
+        && faces[5].colors[0][1].color==RED
+        && faces[5].colors[1][1].color==RED) {
+        run_move("F'R'D'RF'F'", faces);
+    }
+    if (faces[3].colors[0][1].color==WHITE 
+        && faces[3].colors[1][0].color==WHITE 
+        && faces[3].colors[1][2].color==WHITE 
+        && faces[0].colors[1][1].color==GREEN
+        && faces[0].colors[1][2].color==WHITE 
+        && faces[5].colors[0][1].color==RED
+        && faces[5].colors[1][1].color==RED
+        && faces[5].colors[0][1].color==GREEN) {
+        run_move("R'D'RF'F'",faces);
+    }
+    if (faces[3].colors[1][1].color==WHITE
+        && faces[3].colors[2][1].color==RED 
+        && faces[0].colors[0][1].color==WHITE
+        && faces[0].colors[1][1].color==GREEN
+        && faces[5].colors[1][1].color==RED) {
+        run_move("FR",faces);
+    }
+    if (faces[3].colors[1][1].color==WHITE
+        && faces[3].colors[1][2].color==ORANGE 
+        && faces[0].colors[1][1].color==GREEN
+        && faces[5].colors[1][1].color==RED
+        && faces[5].colors[0][1].color==RED) {
+        run_move("R'F'U",faces);
+    }
+    
+}
+
 void place_corners() {}
 void solve_crown() {}
 void make_yellow_cross() {}
@@ -405,8 +453,8 @@ void place_yellow_edges() {}
 void place_yellow_corners() {}
 void solve_yellow_corners() {}
 
-void solve_cube() {
-    make_white_cross();
+void solve_cube(Face faces[6]) {
+    make_white_cross(faces);
     place_corners();
     solve_crown();
     

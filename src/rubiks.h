@@ -40,7 +40,7 @@ void run_move(const char* move, Face face[6]);
 void scramble_cube(Face faces[6]);
 
 void solve_cube();
-void make_white_cross();
+void make_white_cross(Face faces[6]);
 void place_corners();
 void solve_crown();
 void make_yellow_cross();

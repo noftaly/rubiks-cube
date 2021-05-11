@@ -23,6 +23,8 @@ int main() {
             scramble_cube(faces);
         else if (strcmp(input, "solve") == 0)
             solve_cube();
+        /*else if (strcmp(input, "white cross")==0)
+            make_white_cross()*/
         else
             run_move(input, faces);
         display_cube(faces);
