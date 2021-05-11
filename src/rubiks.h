@@ -23,25 +23,21 @@ Face front, back, down, up, left, right;
 void swap_cubes(Cube*, Cube*);
 void rotate_main_face(Cube matrix[3][3]);
 
-void rotate_front();
-void rotate_back();
-void rotate_down();
-void rotate_left();
-void rotate_right();
-void rotate_up();
-void rotate_cube();
+void rotate_front(Face faces[6]);
+void rotate_back(Face faces[6]);
+void rotate_down(Face faces[6]);
+void rotate_left(Face faces[6]);
+void rotate_right(Face faces[6]);
+void rotate_up(Face faces[6]);
+void rotate_cube(Face faces[6]);
 
 void create_face(Cube matrix[3][3], Color);
-void free_face(Cube matrix[3][3]);
-void run_move(const char* move);
+void define_cube(Face faces[6]);
+void create_cube(Face faces[6]);
 
-void define_cube();
-void create_cube();
-void free_cube();
-
-void display_cube();
-
-void scramble_cube();
+void display_cube(Face faces[6]);
+void run_move(const char* move, Face face[6]);
+void scramble_cube(Face faces[6]);
 
 void solve_cube();
 void make_white_cross();
