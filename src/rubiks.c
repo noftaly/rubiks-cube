@@ -298,6 +298,56 @@ void free_cube() {
     free_face(right.colors);
 }
 
+void define_cube() {
+    create_face(front.colors, UNSET);
+    create_face(back.colors, UNSET);
+    create_face(down.colors, UNSET);
+    create_face(up.colors, UNSET);
+    create_face(left.colors, UNSET);
+    create_face(right.colors, UNSET);
+
+    puts("You will have to enter each color (w,g,o,b,r,y) index by index.");
+    for (int face = 0; face < 6; face++) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                char color;
+                printf("Enter color for cube on face %d at position row=%d,col=%d: ", face, row+1, col+1);
+                scanf(" %c", &color);
+                Cube cube;
+                switch (color) {
+                    case 'w':
+                        cube.color = WHITE;
+                        front.colors[row][col] = cube;
+                        break;
+                    case 'g':
+                        cube.color = GREEN;
+                        front.colors[row][col] = cube;
+                        break;
+                    case 'o':
+                        cube.color = ORANGE;
+                        front.colors[row][col] = cube;
+                        break;
+                    case 'b':
+                        cube.color = BLUE;
+                        front.colors[row][col] = cube;
+                        break;
+                    case 'r':
+                        cube.color = RED;
+                        front.colors[row][col] = cube;
+                        break;
+                    case 'y':
+                        cube.color = YELLOW;
+                        front.colors[row][col] = cube;
+                        break;
+                    default:
+                        puts("Invalid character.");
+                        // TODO: Make it try again
+                }
+            }
+        }
+    }
+}
+
 char* to_char(Color color) {
     switch (color) {
         case GREEN:
@@ -312,6 +362,8 @@ char* to_char(Color color) {
             return "\e[0;37mW\e[0m";
         case ORANGE:
             return "\e[0;95mO\e[0m";
+        case UNSET:
+            return "U";
     }
 }
 

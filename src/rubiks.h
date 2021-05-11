@@ -6,7 +6,8 @@ typedef enum {
     BLUE,
     YELLOW,
     WHITE,
-    ORANGE
+    ORANGE,
+    UNSET
 } Color;
 
 typedef struct {
@@ -34,6 +35,7 @@ void create_face(Cube matrix[3][3], Color);
 void free_face(Cube matrix[3][3]);
 void run_move(const char* move);
 
+void define_cube();
 void create_cube();
 void free_cube();
 
