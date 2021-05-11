@@ -18,7 +18,7 @@ int main() {
         else if (strcmp(input, "scramble") == 0)
             scramble_cube();
         else if (strcmp(input, "solve") == 0)
-            scramble_cube();
+            solve_cube();
         else
             run_move(input);
         display_cube();
