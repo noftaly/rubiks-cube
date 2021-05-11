@@ -20,7 +20,6 @@ typedef struct {
 Face front, back, down, up, left, right;
 
 void swap_cubes(Cube*, Cube*);
-void swap_faces(Cube matrix[3][3], char* rc, Cube matrix1[3][3], char* rc1);
 void rotate_main_face(Cube matrix[3][3]);
 
 void rotate_front();

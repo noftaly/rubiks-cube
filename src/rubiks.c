@@ -20,35 +20,30 @@ void rotate_main_face(Cube matrix[3][3]) {
     swap_cubes(&matrix[0][1], &matrix[1][0]);
 }
 
-void swap_faces(Cube matrix[3][3], char* rc, Cube matrix1[3][3], char* rc1) {
-    int cr = *(rc + 1) - '0';
-    int cr1 = *(rc1 + 1) - '0';
-
-    if (*rc == 'r') {
-        if (*rc1 == 'r') {
-            for (int i = 0; i < 3; i++)
-                swap_cubes(&matrix[cr][i], &matrix1[cr1][i]);
-        } else if (*rc1 == 'c') {
-            for (int i = 0; i < 3; i++)
-                swap_cubes(&matrix[cr][i], &matrix1[i][cr1]);
-        }
-    } else if (*rc == 'c') {
-        if (*rc1 == 'c') {
-            for (int i = 0; i < 3; i++)
-                swap_cubes(&matrix[i][cr], &matrix1[i][cr1]);
-        } else if (*rc1 == 'r') {
-            for (int i = 0; i < 3; i++)
-                swap_cubes(&matrix[i][cr], &matrix1[cr1][i]);
-        }
-    }
-}
-
 void rotate_front() {
-    swap_cubes(&left.colors[0][2], &left.colors[2][2]);
-    swap_cubes(&right.colors[0][0], &right.colors[2][0]);
-    swap_faces(down.colors, (char*) "r0", left.colors, (char*) "c2");
-    swap_faces(down.colors, (char*) "r0", up.colors, (char*) "r2");
-    swap_faces(down.colors, (char*) "r0", right.colors, (char*) "c0");
+    Cube temp, temp2;
+
+    // Rotate top corner
+    temp = up.colors[2][0];
+    up.colors[2][0] = left.colors[2][2];
+    left.colors[2][2] = down.colors[0][2];
+    down.colors[0][2] = right.colors[0][0];
+    right.colors[0][0] = temp;
+
+    // Rotate middle corner
+    temp = up.colors[2][1];
+    up.colors[2][1] = left.colors[1][2];
+    left.colors[1][2] = down.colors[0][1];
+    down.colors[0][1] = right.colors[1][0];
+    right.colors[1][0] = temp;
+
+    // Rotate bottom corner
+    temp = up.colors[2][2];
+    up.colors[2][2] = left.colors[0][2];
+    left.colors[0][2] = down.colors[0][0];
+    down.colors[0][0] = right.colors[2][0];
+    right.colors[2][0] = temp;
+
     rotate_main_face(front.colors);
 }
 
@@ -185,11 +180,29 @@ void rotate_down() {
 }
 
 void rotate_back() {
-    swap_cubes(&up.colors[0][0], &up.colors[0][2]);
-    swap_cubes(&down.colors[2][0], &down.colors[2][2]);
-    swap_faces(down.colors, (char*) "r2", right.colors, (char*) "c2");
-    swap_faces(down.colors, (char*) "r2", up.colors, (char*) "r0");
-    swap_faces(down.colors, (char*) "r2", left.colors, (char*) "c0");
+    Cube temp, temp2;
+
+    // Rotate top corner
+    temp = up.colors[0][0];
+    up.colors[0][0] = right.colors[0][2];
+    right.colors[0][2] = down.colors[2][2];
+    down.colors[2][2] = left.colors[2][0];
+    left.colors[2][0] = temp;
+
+    // Rotate middle corner
+    temp = up.colors[0][1];
+    up.colors[0][1] = right.colors[1][0];
+    right.colors[1][2] = down.colors[2][1];
+    down.colors[2][1] = left.colors[1][0];
+    left.colors[1][0] = temp;
+
+    // Rotate bottom corner
+    temp = up.colors[0][2];
+    up.colors[0][2] = right.colors[2][2];
+    right.colors[2][2] = down.colors[2][0];
+    down.colors[2][0] = left.colors[0][0];
+    left.colors[0][0] = temp;
+
     rotate_main_face(back.colors);
 }
 
