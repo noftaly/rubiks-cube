@@ -291,9 +291,9 @@ void define_cube(Face faces[6]) {
     create_face(faces[4].colors, UNSET);
     create_face(faces[5].colors, UNSET);
 
-    char* name_face[6]={"up", "down", "right", "left", "front", "back"};
+    char* name_face[6] = { "up", "down", "right", "left", "front", "back" };
 
-    puts("You will have to enter each color (w,g,o,b,r,y) index by index.");
+    puts("You will have to enter each color (w,g,o,b,r,y,u) index by index.");
     for (int face = 0; face < 6; face++) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -327,8 +327,9 @@ void define_cube(Face faces[6]) {
                         faces[face].colors[row][col] = cube;
                         break;
                     default:
-                        puts("Invalid character.");
-                        // TODO: Make it try again
+                        cube.color = UNSET;
+                        faces[face].colors[row][col] = cube;
+                        break;
                 }
             }
         }
@@ -350,7 +351,7 @@ char* to_char(Color color) {
         case ORANGE:
             return "\e[0;95mO\e[0m";
         case UNSET:
-            return "U";
+            return "\e[0;90mU\e[0m";
     }
 }
 
