@@ -291,12 +291,14 @@ void define_cube(Face faces[6]) {
     create_face(faces[4].colors, UNSET);
     create_face(faces[5].colors, UNSET);
 
+    char* name_face[6]={"up", "down", "right", "left", "front", "back"};
+
     puts("You will have to enter each color (w,g,o,b,r,y) index by index.");
     for (int face = 0; face < 6; face++) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 char color;
-                printf("Enter color for cube on face %d at position row=%d,col=%d: ", face, row+1, col+1);
+                printf("Enter color for cube on face %s at position row=%d,col=%d: ", name_face[face], row+1, col+1);
                 scanf(" %c", &color);
                 Cube cube;
                 switch (color) {
@@ -421,13 +423,14 @@ void make_white_cross(Face faces[6]) {
     }
     if (faces[3].colors[0][1].color==WHITE 
         && faces[3].colors[1][0].color==WHITE 
+        && faces[3].colors[1][1].color==WHITE
         && faces[3].colors[1][2].color==WHITE 
         && faces[0].colors[1][1].color==GREEN
         && faces[0].colors[1][2].color==WHITE 
         && faces[5].colors[0][1].color==RED
         && faces[5].colors[1][1].color==RED
-        && faces[5].colors[0][1].color==GREEN) {
-        run_move("R'D'RF'F'",faces);
+        && faces[5].colors[1][0].color==GREEN) {
+        run_move("R'D'RFF",faces);
     }
     if (faces[3].colors[1][1].color==WHITE
         && faces[3].colors[2][1].color==RED 
@@ -440,7 +443,7 @@ void make_white_cross(Face faces[6]) {
         && faces[3].colors[1][2].color==ORANGE 
         && faces[0].colors[1][1].color==GREEN
         && faces[5].colors[1][1].color==RED
-        && faces[5].colors[0][1].color==RED) {
+        && faces[5].colors[0][1].color==WHITE) {
         run_move("R'F'U",faces);
     }
     
