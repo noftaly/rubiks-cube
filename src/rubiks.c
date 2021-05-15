@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "rubiks.h"
 
 void swap_cubes(Cube* source, Cube* dest) {
@@ -400,6 +401,23 @@ void scramble_cube(Face faces[6]) {
     printf("\n\n");
 }
 
+bool has_white_cross(Face faces[6]) {
+    return faces[3].colors[0][1].color == WHITE
+        && faces[3].colors[1][0].color == WHITE
+        && faces[3].colors[1][2].color == WHITE
+        && faces[3].colors[2][1].color == WHITE
+        && faces[3].colors[1][1].color == WHITE;
+}
+
+bool has_perfect_white_cross(Face faces[6]) {
+    return has_white_cross(faces)
+        && faces[0].colors[0][1].color == faces[0].colors[1][1].color
+        && faces[1].colors[0][1].color == faces[1].colors[1][1].color
+        && faces[4].colors[0][1].color == faces[4].colors[1][1].color
+        && faces[5].colors[0][1].color == faces[5].colors[1][1].color;
+    ;
+}
+
 void make_white_cross(Face faces[6]) {
     int i, j;
     if (faces[3].colors[0][1].color==WHITE
@@ -520,7 +538,7 @@ void solve_crown(Face faces[6]) {
         if (faces[i].colors[2][1].color == current_face_main_color) {
             if (top_edge == previous_face_main_color)
                 run_move("U' L' U L U F U' F'", faces);
-            else
+            else if (top_edge == next_face_main_color)
                 run_move("U R U' R' U' F' U F", faces);
         } else {
             run_move("D", faces);

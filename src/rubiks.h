@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 typedef enum {
     RED,
     GREEN,
@@ -38,6 +40,9 @@ void create_cube(Face faces[6]);
 void display_cube(Face faces[6]);
 void run_move(const char* move, Face face[6]);
 void scramble_cube(Face faces[6]);
+
+bool has_white_cross(Face faces[6]);
+bool has_perfect_white_cross(Face faces[6]);
 
 void solve_cube();
 void make_white_cross(Face faces[6]);
