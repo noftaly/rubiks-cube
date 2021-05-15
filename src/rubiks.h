@@ -41,8 +41,8 @@ void scramble_cube(Face faces[6]);
 
 void solve_cube();
 void make_white_cross(Face faces[6]);
-void place_corners();
-void solve_crown();
+void place_corners(Face faces[6]);
+void solve_crown(Face faces[6]);
 void make_yellow_cross();
 void place_yellow_edges();
 void place_yellow_corners();

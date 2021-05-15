@@ -450,8 +450,95 @@ void make_white_cross(Face faces[6]) {
     
 }
 
-void place_corners() {}
-void solve_crown() {}
+int get_next_face(int index) {
+    switch(index) {
+        case 0:
+            return 5;
+        case 1:
+            return 4;
+        case 4:
+            return 0;
+        case 5:
+            return 1;
+    }
+}
+
+int get_previous_face(int index){
+    switch(index){
+        case 0:
+            return 4;
+        case 1:
+            return 5;
+        case 4:
+            return 1;
+        case 5:
+            return 0;
+    }
+}
+
+void place_corners(Face faces[6]) {
+    for (int i=0; i<6; i++){
+        if  (i==2 || i==3){
+            continue;
+        }
+        int next_face=get_next_face(i);
+        if ((faces[i].colors[2][2].color==faces[next_face].colors[1][1].color && faces[next_face].colors[0][2].color==WHITE)
+            || (faces[i].colors[2][2].color==WHITE && faces[next_face].colors[0][2].color==faces[i].colors[1][1].color)
+            || (faces[i].colors[2][2].color==faces[next_face].colors[1][1].color 
+            && faces[next_face].colors[0][2].color==faces[i].colors[1][1].color)){
+                run_move("R'D'RD", faces);
+        }
+        else{
+            run_move("D", faces);
+        }
+    }
+}
+
+
+
+void solve_crown(Face faces[6]) {
+    int top_edges[6][2] = {
+    { 0, 1 }, // index 0 : Front
+    { 2, 1 }, // index 1
+    { -1, -1 }, // index 2
+    { -1, -1 }, // index 3
+    { 1, 2 }, // index 4 : Right
+    { 1, 0 }, // index 5 : Left
+};
+
+    for (int i=0; i<6; i++){
+        if  (i==2 || i==3){
+            continue;
+        }
+
+        int previous_face=get_previous_face(i);
+        int next_face=get_next_face(i);
+        int associated_top_edge[2] = top_edges[i];
+        int associated_top_edge_x = associated_top_edge[0];
+        int associated_top_edge_y = associated_top_edge[1];
+
+        if (faces[i].colors[2][1].color==faces[i].colors[1][1].color 
+            && (faces[2].colors[associated_top_edge_x][associated_top_edge_y].color == faces[previous_face].colors[1][1].color
+            || faces[2].colors[associated_top_edge_x][associated_top_edge_y].color == faces[next_face].colors[1][1].color)) {
+
+                if (faces[2].colors[associated_top_edge_x][associated_top_edge_y].color == faces[previous_face].colors[1][1].color){
+                    run_move("U’ L’ U L U F U’ F’", faces);        
+                }
+                else{
+                    run_move("U R U’ R’ U’ F’ U F", faces);
+                }
+            }
+
+        else{
+            run_move("D", faces);
+        }
+        if (faces[i].colors[1][2].color==faces[next_face].colors[1][1].color 
+            && faces[next_face].colors[1][0].color==faces[i].colors[1][1].color){
+                run_move("U R U’ R’ U’ F’ U F U2 U R U’ R’ U’ F’ U F", faces);
+            }
+    }
+}
+
 void make_yellow_cross() {}
 void place_yellow_edges() {}
 void place_yellow_corners() {}
@@ -459,8 +546,8 @@ void solve_yellow_corners() {}
 
 void solve_cube(Face faces[6]) {
     make_white_cross(faces);
-    place_corners();
-    solve_crown();
+    place_corners(faces);
+    solve_crown(faces);
     
     make_yellow_cross();
     place_yellow_edges();
