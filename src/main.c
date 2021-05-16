@@ -8,40 +8,46 @@ int main() {
     srand(time(NULL));
 
     Face faces[6] = {
+        // Front
         { .colors = {
-            { { .color = YELLOW }, { .color = WHITE }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = GREEN }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-        } },
+            { { .color = YELLOW }, { .color = RED }, { .color = BLUE } },
+            { { .color = GREEN }, { .color = GREEN }, { .color = RED } },
+            { { .color = RED }, { .color = GREEN }, { .color = BLUE } },
+        }, .main_color = GREEN },
+        // Back
         { .colors = {
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-        } },
+            { { .color = BLUE }, { .color = YELLOW }, { .color = GREEN } },
+            { { .color = GREEN }, { .color = BLUE }, { .color = BLUE } },
+            { { .color = ORANGE }, { .color = ORANGE }, { .color = ORANGE } },
+        }, .main_color = BLUE },
+        // Down
         { .colors = {
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-        } },
+            { { .color = RED }, { .color = YELLOW }, { .color = ORANGE } },
+            { { .color = YELLOW }, { .color = YELLOW }, { .color = GREEN } },
+            { { .color = GREEN }, { .color = YELLOW }, { .color = YELLOW } },
+        }, .main_color = YELLOW },
+        // Up
         { .colors = {
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = WHITE }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = RED }, { .color = YELLOW } },
-        } },
+            { { .color = WHITE }, { .color = WHITE }, { .color = WHITE } },
+            { { .color = WHITE }, { .color = WHITE }, { .color = WHITE } },
+            { { .color = WHITE }, { .color = WHITE }, { .color = WHITE } },
+        }, .main_color = WHITE },
+        // Left
         { .colors = {
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-        } },
+            { { .color = ORANGE }, { .color = ORANGE }, { .color = ORANGE } },
+            { { .color = RED }, { .color = ORANGE }, { .color = ORANGE } },
+            { { .color = BLUE }, { .color = YELLOW }, { .color = YELLOW } },
+        }, .main_color = ORANGE },
+        // Right
         { .colors = {
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = RED }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = YELLOW }, { .color = YELLOW } },
-        } },
+            { { .color = RED }, { .color = RED }, { .color = RED } },
+            { { .color = ORANGE }, { .color = RED }, { .color = BLUE } },
+            { { .color = ORANGE }, { .color = BLUE }, { .color = RED } },
+        }, .main_color = RED },
     };
 
-    //Face faces[6];
-    //create_cube(faces);
+    // Face faces[6];
+    // create_cube(faces);
     display_cube(faces);
     char input[100];
 

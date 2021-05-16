@@ -18,36 +18,37 @@ typedef struct {
 
 typedef struct {
     Cube colors[3][3];
+    Color main_color;
 } Face;
 
 Face front, back, down, up, left, right;
 
 void swap_cubes(Cube*, Cube*);
-void rotate_main_face(Cube matrix[3][3]);
+void rotate_main_face(Face);
 
-void rotate_front(Face faces[6]);
-void rotate_back(Face faces[6]);
-void rotate_down(Face faces[6]);
-void rotate_left(Face faces[6]);
-void rotate_right(Face faces[6]);
-void rotate_up(Face faces[6]);
-void rotate_cube(Face faces[6]);
+void rotate_front(Face[6]);
+void rotate_back(Face[6]);
+void rotate_down(Face[6]);
+void rotate_left(Face[6]);
+void rotate_right(Face[6]);
+void rotate_up(Face[6]);
+void rotate_cube(Face[6]);
 
-void create_face(Cube matrix[3][3], Color);
-void define_cube(Face faces[6]);
-void create_cube(Face faces[6]);
+void create_face(Face*, Color);
+void define_cube(Face[6]);
+void create_cube(Face[6]);
 
-void display_cube(Face faces[6]);
-void run_move(const char* move, Face face[6]);
-void scramble_cube(Face faces[6]);
+void display_cube(Face[6]);
+void run_move(const char* move, Face[6]);
+void scramble_cube(Face[6]);
 
-bool has_white_cross(Face faces[6]);
-bool has_perfect_white_cross(Face faces[6]);
+bool has_white_cross(Face[6]);
+bool has_perfect_white_cross(Face[6]);
 
 void solve_cube();
-void make_white_cross(Face faces[6]);
-void place_corners(Face faces[6]);
-void solve_crown(Face faces[6]);
+void make_white_cross(Face[6]);
+void place_corners(Face[6]);
+void solve_crown(Face[6]);
 void make_yellow_cross();
 void place_yellow_edges();
 void place_yellow_corners();
