@@ -10,15 +10,15 @@ void swap_cubes(Cube* source, Cube* dest) {
     *dest = temp;
 }
 
-void rotate_main_face(Face face) {
+void rotate_main_face(Face* face) {
     // Rotate corners
-    swap_cubes(&face.colors[0][0], &face.colors[0][2]);
-    swap_cubes(&face.colors[0][0], &face.colors[2][2]);
-    swap_cubes(&face.colors[0][0], &face.colors[2][0]);
+    swap_cubes(&face->colors[0][0], &face->colors[0][2]);
+    swap_cubes(&face->colors[0][0], &face->colors[2][2]);
+    swap_cubes(&face->colors[0][0], &face->colors[2][0]);
     // Rotate edges
-    swap_cubes(&face.colors[0][1], &face.colors[1][2]);
-    swap_cubes(&face.colors[0][1], &face.colors[2][1]);
-    swap_cubes(&face.colors[0][1], &face.colors[1][0]);
+    swap_cubes(&face->colors[0][1], &face->colors[1][2]);
+    swap_cubes(&face->colors[0][1], &face->colors[2][1]);
+    swap_cubes(&face->colors[0][1], &face->colors[1][0]);
 }
 
 void rotate_front(Face faces[6]) {
@@ -45,7 +45,7 @@ void rotate_front(Face faces[6]) {
     faces[2].colors[0][0] = faces[5].colors[2][0];
     faces[5].colors[2][0] = temp;
 
-    rotate_main_face(faces[0]);
+    rotate_main_face(&faces[0]);
 }
 
 void rotate_right(Face faces[6]) {
@@ -72,7 +72,7 @@ void rotate_right(Face faces[6]) {
     faces[2].colors[2][2] = faces[1].colors[0][0];
     faces[1].colors[0][0] = temp;
 
-    rotate_main_face(faces[5]);
+    rotate_main_face(&faces[5]);
 }
 
 void rotate_left(Face faces[6]) {
@@ -99,7 +99,7 @@ void rotate_left(Face faces[6]) {
     faces[3].colors[2][0] = faces[1].colors[0][2];
     faces[1].colors[0][2] = temp;
 
-    rotate_main_face(faces[4]);
+    rotate_main_face(&faces[4]);
 }
 
 void rotate_up(Face faces[6]) {
@@ -126,7 +126,7 @@ void rotate_up(Face faces[6]) {
     faces[5].colors[0][2] = faces[1].colors[0][2];
     faces[1].colors[0][2] = temp;
 
-    rotate_main_face(faces[3]);
+    rotate_main_face(&faces[3]);
 }
 
 void rotate_down(Face faces[6]) {
@@ -153,7 +153,7 @@ void rotate_down(Face faces[6]) {
     faces[4].colors[2][2] = faces[1].colors[2][2];
     faces[1].colors[2][2] = temp;
 
-    rotate_main_face(faces[2]);
+    rotate_main_face(&faces[2]);
 }
 
 void rotate_back(Face faces[6]) {
@@ -168,7 +168,7 @@ void rotate_back(Face faces[6]) {
 
     // Rotate middle corner
     temp = faces[3].colors[0][1];
-    faces[3].colors[0][1] = faces[5].colors[1][0];
+    faces[3].colors[0][1] = faces[5].colors[1][2];
     faces[5].colors[1][2] = faces[2].colors[2][1];
     faces[2].colors[2][1] = faces[4].colors[1][0];
     faces[4].colors[1][0] = temp;
@@ -180,7 +180,7 @@ void rotate_back(Face faces[6]) {
     faces[2].colors[2][0] = faces[4].colors[0][0];
     faces[4].colors[0][0] = temp;
 
-    rotate_main_face(faces[1]);
+    rotate_main_face(&faces[1]);
 }
 
 void rotate_cube(Face faces[6]) {
@@ -189,10 +189,10 @@ void rotate_cube(Face faces[6]) {
     front = left;
     left = back;
     back = temp;
-    rotate_main_face(faces[3]);
-    rotate_main_face(faces[3]);
-    rotate_main_face(faces[3]);
-    rotate_main_face(faces[2]);
+    rotate_main_face(&faces[3]);
+    rotate_main_face(&faces[3]);
+    rotate_main_face(&faces[3]);
+    rotate_main_face(&faces[2]);
 }
 
 void create_face(Face* face, Color color) {
