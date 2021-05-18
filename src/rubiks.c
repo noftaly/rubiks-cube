@@ -183,16 +183,51 @@ void rotate_back(Face faces[6]) {
     rotate_main_face(&faces[1]);
 }
 
-void rotate_cube(Face faces[6]) {
-    Face temp = right;
-    right = front;
-    front = left;
-    left = back;
-    back = temp;
-    rotate_main_face(&faces[3]);
-    rotate_main_face(&faces[3]);
+void rotate_cube_x(Face faces[6]) {
+    // Same as R, but for the whole cube
+    Face temp = faces[3];
+    faces[3] = faces[0];
+    faces[0] = faces[2];
+    faces[2] = faces[1];
+    faces[1] = temp;
+    rotate_main_face(&faces[1]);
+    rotate_main_face(&faces[1]);
+    rotate_main_face(&faces[2]);
+    rotate_main_face(&faces[2]);
+    rotate_main_face(&faces[4]);
+    rotate_main_face(&faces[4]);
+    rotate_main_face(&faces[4]);
+    rotate_main_face(&faces[5]);
+}
+
+void rotate_cube_y(Face faces[6]) {
+    // Same as U but for the whole cube
+    Face temp = faces[0];
+    faces[0] = faces[5];
+    faces[5] = faces[1];
+    faces[1] = faces[4];
+    faces[4] = temp;
     rotate_main_face(&faces[3]);
     rotate_main_face(&faces[2]);
+    rotate_main_face(&faces[2]);
+    rotate_main_face(&faces[2]);
+}
+
+void rotate_cube_z(Face faces[6]) {
+    // Same as F but for the whole cube
+    Face temp = faces[3];
+    faces[3] = faces[4];
+    faces[4] = faces[2];
+    faces[2] = faces[5];
+    faces[5] = temp;
+    rotate_main_face(&faces[0]);
+    rotate_main_face(&faces[1]);
+    rotate_main_face(&faces[2]);
+    rotate_main_face(&faces[1]);
+    rotate_main_face(&faces[1]);
+    rotate_main_face(&faces[3]);
+    rotate_main_face(&faces[4]);
+    rotate_main_face(&faces[5]);
 }
 
 void create_face(Face* face, Color color) {
@@ -237,10 +272,20 @@ void run_move(const char* move, Face faces[6]) {
                     rotate_back(faces);
                     rotate_back(faces);
                     break;
+                case 'X': case 'x':
+                    rotate_cube_x(faces);
+                    rotate_cube_x(faces);
+                    rotate_cube_x(faces);
+                    break;
+                case 'Y': case 'y':
+                    rotate_cube_y(faces);
+                    rotate_cube_y(faces);
+                    rotate_cube_y(faces);
+                    break;
                 case 'Z': case 'z':
-                    rotate_cube(faces);
-                    rotate_cube(faces);
-                    rotate_cube(faces);
+                    rotate_cube_z(faces);
+                    rotate_cube_z(faces);
+                    rotate_cube_z(faces);
                     break;
             }
             i++;
@@ -264,8 +309,14 @@ void run_move(const char* move, Face faces[6]) {
                 case 'B': case 'b':
                     rotate_back(faces);
                     break;
+                case 'X': case 'x':
+                    rotate_cube_x(faces);
+                    break;
+                case 'Y': case 'y':
+                    rotate_cube_y(faces);
+                    break;
                 case 'Z': case 'z':
-                    rotate_cube(faces);
+                    rotate_cube_z(faces);
                     break;
             }
         }

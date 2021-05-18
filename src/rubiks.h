@@ -32,7 +32,9 @@ void rotate_down(Face[6]);
 void rotate_left(Face[6]);
 void rotate_right(Face[6]);
 void rotate_up(Face[6]);
-void rotate_cube(Face[6]);
+void rotate_cube_x(Face[6]);
+void rotate_cube_y(Face[6]);
+void rotate_cube_z(Face[6]);
 
 void create_face(Face*, Color);
 void define_cube(Face[6]);
