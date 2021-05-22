@@ -21,139 +21,50 @@ void rotate_main_face(Face* face) {
     swap_cubes(&face->colors[0][1], &face->colors[1][0]);
 }
 
+
 void rotate_front(Face faces[6]) {
-    Cube temp;
-
-    // Rotate top corner
-    temp = faces[3].colors[2][0];
-    faces[3].colors[2][0] = faces[4].colors[2][2];
-    faces[4].colors[2][2] = faces[2].colors[0][2];
-    faces[2].colors[0][2] = faces[5].colors[0][0];
-    faces[5].colors[0][0] = temp;
-
-    // Rotate middle corner
-    temp = faces[3].colors[2][1];
-    faces[3].colors[2][1] = faces[4].colors[1][2];
-    faces[4].colors[1][2] = faces[2].colors[0][1];
-    faces[2].colors[0][1] = faces[5].colors[1][0];
-    faces[5].colors[1][0] = temp;
-
-    // Rotate bottom corner
-    temp = faces[3].colors[2][2];
-    faces[3].colors[2][2] = faces[4].colors[0][2];
-    faces[4].colors[0][2] = faces[2].colors[0][0];
-    faces[2].colors[0][0] = faces[5].colors[2][0];
-    faces[5].colors[2][0] = temp;
-
-    rotate_main_face(&faces[0]);
+    // Rotate the cube to have the front face at the back, then rotate the back
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+    rotate_back(faces);
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
 }
 
 void rotate_right(Face faces[6]) {
-    Cube temp;
-
-    // Rotate top corner
-    temp = faces[3].colors[0][2];
-    faces[3].colors[0][2] = faces[0].colors[0][2];
-    faces[0].colors[0][2] = faces[2].colors[0][2];
-    faces[2].colors[0][2] = faces[1].colors[2][0];
-    faces[1].colors[2][0] = temp;
-
-    // Rotate middle corner
-    temp = faces[3].colors[1][2];
-    faces[3].colors[1][2] = faces[0].colors[1][2];
-    faces[0].colors[1][2] = faces[2].colors[1][2];
-    faces[2].colors[1][2] = faces[1].colors[1][0];
-    faces[1].colors[1][0] = temp;
-
-    // Rotate bottom corner
-    temp = faces[3].colors[2][2];
-    faces[3].colors[2][2] = faces[0].colors[2][2];
-    faces[0].colors[2][2] = faces[2].colors[2][2];
-    faces[2].colors[2][2] = faces[1].colors[0][0];
-    faces[1].colors[0][0] = temp;
-
-    rotate_main_face(&faces[5]);
+    // Rotate the cube to have the right face at the back, then rotate the back
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+    rotate_back(faces);
+    rotate_cube_y(faces);
 }
 
 void rotate_left(Face faces[6]) {
-    Cube temp;
-
-    // Rotate top corner
-    temp = faces[2].colors[0][0];
-    faces[2].colors[0][0] = faces[0].colors[0][0];
-    faces[0].colors[0][0] = faces[3].colors[0][0];
-    faces[3].colors[0][0] = faces[1].colors[2][2];
-    faces[1].colors[2][2] = temp;
-
-    // Rotate middle corner
-    temp = faces[2].colors[1][0];
-    faces[2].colors[1][0] = faces[0].colors[1][0];
-    faces[0].colors[1][0] = faces[3].colors[1][0];
-    faces[3].colors[1][0] = faces[1].colors[1][2];
-    faces[1].colors[1][2] = temp;
-
-    // Rotate bottom corner
-    temp = faces[2].colors[2][0];
-    faces[2].colors[2][0] = faces[0].colors[2][0];
-    faces[0].colors[2][0] = faces[3].colors[2][0];
-    faces[3].colors[2][0] = faces[1].colors[0][2];
-    faces[1].colors[0][2] = temp;
-
-    rotate_main_face(&faces[4]);
+    // Rotate the cube to have the left face at the back, then rotate the back
+    rotate_cube_y(faces);
+    rotate_back(faces);
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
 }
 
 void rotate_up(Face faces[6]) {
-    Cube temp;
-
-    // Rotate top corner
-    temp = faces[4].colors[0][0];
-    faces[4].colors[0][0] = faces[0].colors[0][0];
-    faces[0].colors[0][0] = faces[5].colors[0][0];
-    faces[5].colors[0][0] = faces[1].colors[0][0];
-    faces[1].colors[0][0] = temp;
-
-    // Rotate middle corner
-    temp = faces[4].colors[0][1];
-    faces[4].colors[0][1] = faces[0].colors[0][1];
-    faces[0].colors[0][1] = faces[5].colors[0][1];
-    faces[5].colors[0][1] = faces[1].colors[0][1];
-    faces[1].colors[0][1] = temp;
-
-    // Rotate bottom corner
-    temp = faces[4].colors[0][2];
-    faces[4].colors[0][2] = faces[0].colors[0][2];
-    faces[0].colors[0][2] = faces[5].colors[0][2];
-    faces[5].colors[0][2] = faces[1].colors[0][2];
-    faces[1].colors[0][2] = temp;
-
-    rotate_main_face(&faces[3]);
+    // Rotate the cube to have the upper face at the back, then rotate the back
+    rotate_cube_x(faces);
+    rotate_back(faces);
+    rotate_cube_x(faces);
+    rotate_cube_x(faces);
+    rotate_cube_x(faces);
 }
 
 void rotate_down(Face faces[6]) {
-    Cube temp;
-
-    // Rotate top corner
-    temp = faces[5].colors[2][0];
-    faces[5].colors[2][0] = faces[0].colors[2][0];
-    faces[0].colors[2][0] = faces[4].colors[2][0];
-    faces[4].colors[2][0] = faces[1].colors[2][0];
-    faces[1].colors[2][0] = temp;
-
-    // Rotate middle corner
-    temp = faces[5].colors[2][1];
-    faces[5].colors[2][1] = faces[0].colors[2][1];
-    faces[0].colors[2][1] = faces[4].colors[2][1];
-    faces[4].colors[2][1] = faces[1].colors[2][1];
-    faces[1].colors[2][1] = temp;
-
-    // Rotate bottom corner
-    temp = faces[5].colors[2][2];
-    faces[5].colors[2][2] = faces[0].colors[2][2];
-    faces[0].colors[2][2] = faces[4].colors[2][2];
-    faces[4].colors[2][2] = faces[1].colors[2][2];
-    faces[1].colors[2][2] = temp;
-
-    rotate_main_face(&faces[2]);
+    // Rotate the cube to have the down face at the back, then rotate the back
+    rotate_cube_x(faces);
+    rotate_cube_x(faces);
+    rotate_cube_x(faces);
+    rotate_back(faces);
+    rotate_cube_x(faces);
 }
 
 void rotate_back(Face faces[6]) {
@@ -230,6 +141,64 @@ void rotate_cube_z(Face faces[6]) {
     rotate_main_face(&faces[5]);
 }
 
+
+void rotate_front_reverse(Face faces[6]) {
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+    rotate_back_reverse(faces);
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+}
+
+void rotate_right_reverse(Face faces[6]) {
+    rotate_cube_y_reverse(faces);
+    rotate_back_reverse(faces);
+    rotate_cube_y(faces);
+}
+
+void rotate_left_reverse(Face faces[6]) {
+    rotate_cube_y(faces);
+    rotate_back_reverse(faces);
+    rotate_cube_y_reverse(faces);
+}
+
+void rotate_up_reverse(Face faces[6]) {
+    rotate_cube_x(faces);
+    rotate_back_reverse(faces);
+    rotate_cube_x_reverse(faces);
+}
+
+void rotate_down_reverse(Face faces[6]) {
+    rotate_cube_x_reverse(faces);
+    rotate_back_reverse(faces);
+    rotate_cube_x(faces);
+}
+
+void rotate_back_reverse(Face faces[6]) {
+    rotate_back(faces);
+    rotate_back(faces);
+    rotate_back(faces);
+}
+
+void rotate_cube_x_reverse(Face faces[6]) {
+    rotate_cube_x(faces);
+    rotate_cube_x(faces);
+    rotate_cube_x(faces);
+}
+
+void rotate_cube_y_reverse(Face faces[6]) {
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+    rotate_cube_y(faces);
+}
+
+void rotate_cube_z_reverse(Face faces[6]) {
+    rotate_cube_z(faces);
+    rotate_cube_z(faces);
+    rotate_cube_z(faces);
+}
+
+
 void create_face(Face* face, Color color) {
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++)
@@ -243,49 +212,31 @@ void run_move(const char* move, Face faces[6]) {
         if (move[i + 1] == '\'') {
             switch (move[i]) {
                 case 'R': case 'r':
-                    rotate_right(faces);
-                    rotate_right(faces);
-                    rotate_right(faces);
+                    rotate_right_reverse(faces);
                     break;
                 case 'L': case 'l':
-                    rotate_left(faces);
-                    rotate_left(faces);
-                    rotate_left(faces);
+                    rotate_left_reverse(faces);
                     break;
                 case 'U': case 'u':
-                    rotate_up(faces);
-                    rotate_up(faces);
-                    rotate_up(faces);
+                    rotate_up_reverse(faces);
                     break;
                 case 'D': case 'd':
-                    rotate_down(faces);
-                    rotate_down(faces);
-                    rotate_down(faces);
+                    rotate_down_reverse(faces);
                     break;
                 case 'F': case 'f':
-                    rotate_front(faces);
-                    rotate_front(faces);
-                    rotate_front(faces);
+                    rotate_front_reverse(faces);
                     break;
                 case 'B': case 'b':
-                    rotate_back(faces);
-                    rotate_back(faces);
-                    rotate_back(faces);
+                    rotate_back_reverse(faces);
                     break;
                 case 'X': case 'x':
-                    rotate_cube_x(faces);
-                    rotate_cube_x(faces);
-                    rotate_cube_x(faces);
+                    rotate_cube_x_reverse(faces);
                     break;
                 case 'Y': case 'y':
-                    rotate_cube_y(faces);
-                    rotate_cube_y(faces);
-                    rotate_cube_y(faces);
+                    rotate_cube_y_reverse(faces);
                     break;
                 case 'Z': case 'z':
-                    rotate_cube_z(faces);
-                    rotate_cube_z(faces);
-                    rotate_cube_z(faces);
+                    rotate_cube_z_reverse(faces);
                     break;
             }
             i++;

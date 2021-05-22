@@ -36,6 +36,16 @@ void rotate_cube_x(Face[6]);
 void rotate_cube_y(Face[6]);
 void rotate_cube_z(Face[6]);
 
+void rotate_front_reverse(Face[6]);
+void rotate_back_reverse(Face[6]);
+void rotate_down_reverse(Face[6]);
+void rotate_left_reverse(Face[6]);
+void rotate_right_reverse(Face[6]);
+void rotate_up_reverse(Face[6]);
+void rotate_cube_x_reverse(Face[6]);
+void rotate_cube_y_reverse(Face[6]);
+void rotate_cube_z_reverse(Face[6]);
+
 void create_face(Face*, Color);
 void define_cube(Face[6]);
 void create_cube(Face[6]);
@@ -47,7 +57,7 @@ void scramble_cube(Face[6]);
 bool has_white_cross(Face[6]);
 bool has_perfect_white_cross(Face[6]);
 
-void solve_cube();
+void solve_cube(Face[6]);
 void make_white_cross(Face[6]);
 void place_corners(Face[6]);
 void solve_crown(Face[6]);
