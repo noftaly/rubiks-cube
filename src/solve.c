@@ -355,6 +355,7 @@ void place_yellow_corners(Face faces[6]) {
         return;
     }
 
+    // Place the only well-placed corner on the bottom right
     if (is_top_lft_placed)
         run_move("Y Y", faces);
     if (is_top_rgt_placed)
@@ -363,6 +364,7 @@ void place_yellow_corners(Face faces[6]) {
         run_move("Y", faces);
 
     run_move("ZZYY L' U R U' L U R' U' YYZZ", faces);
+    // Re-call the function
     place_yellow_corners(faces);
 }
 
