@@ -57,11 +57,14 @@ void scramble_cube(Face[6]);
 bool has_white_cross(Face[6]);
 bool has_perfect_white_cross(Face[6]);
 
+bool has_yellow_cross(Face[6]);
+bool has_perfect_yellow_cross(Face[6]);
+
 void solve_cube(Face[6]);
-void make_white_cross(Face[6]);
-void place_corners(Face[6]);
+void make_perfect_white_cross(Face[6]);
+void place_white_corners(Face[6]);
 void solve_crown(Face[6]);
 void make_yellow_cross(Face[6]);
-void place_yellow_edges();
-void place_yellow_corners();
+void place_yellow_edges(Face[6]);
+void place_yellow_corners(Face[6]);
 void solve_yellow_corners();
