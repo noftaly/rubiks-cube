@@ -511,24 +511,88 @@ int get_previous_face(int index){
 }
 
 void place_corners(Face faces[6]) {
-    for (int i = 0; i < 6; i++) {
-        if (i == 2 || i == 3) continue;
+/*
+    for (int j=0; j<6; j++){
+        for (int i = 0; i < 6; i++) {
+            if (i == 2 || i == 3) continue;
 
-        int next_face = get_next_face(i);
+            int next_face = get_next_face(i);
 
-        Color current_bottom_right = faces[i].colors[2][2].color;
-        Color next_main_color = faces[next_face].main_color;
+            Color current_bottom_right = faces[i].colors[2][2].color;
+            Color next_main_color = faces[next_face].colors[1][1].color;
+            Color next_face_top_right = faces[next_face].colors[0][2].color;
+            Color current_main_color = faces[i].colors[1][1].color;
+
+            if ((   current_bottom_right == next_main_color && next_face_top_right == WHITE)
+                || (current_bottom_right == WHITE           && next_face_top_right == current_main_color)
+                || (current_bottom_right == next_main_color && next_face_top_right == current_main_color)){
+                printf("Ca marche: %d", i);
+                run_move("R' D' R D", faces);*/
+/*        while (faces[3].colors[0][0].color!=WHITE || faces[3].colors[0][1].color!=WHITE || faces[3].colors[0][2].color!=WHITE 
+            || faces[3].colors[1][0].color!=WHITE || faces[3].colors[1][1].color!=WHITE || faces[3].colors[1][2].color!=WHITE 
+            || faces[3].colors[2][0].color!=WHITE || faces[3].colors[2][1].color!=WHITE || faces[3].colors[2][2].color!=WHITE){*/
+
+    if ((   faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == WHITE && faces[2].colors[0][2].color==faces[0].colors[1][1].color)
+        || (faces[0].colors[2][2].color == WHITE           && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color==faces[5].colors[1][1].color)
+        || (faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color==WHITE)){
+        //||(faces[0].colors[2][2].color == )){// green and red faces
+        run_move("R' D' R D", faces);
+        printf("A");
+    }
+            
+    if ((   faces[5].colors[2][2].color == faces[1].colors[1][1].color && faces[1].colors[2][0].color == WHITE && faces[2].colors[2][2].color==faces[5].colors[1][1].color)
+        || (faces[5].colors[2][2].color == WHITE  && faces[1].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[2][2].color==faces[1].colors[1][1].color)
+        || (faces[5].colors[2][2].color == faces[1].colors[1][1].color && faces[1].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[2][2].color==WHITE)){//red and blue faces
+        run_move("B' D' B D", faces);
+        printf("B");
+    }
+
+    if ((   faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == WHITE && faces[2].colors[2][0].color==faces[1].colors[1][1].color)
+        || (faces[1].colors[2][2].color == WHITE           && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[2][0].color==faces[4].colors[1][1].color)
+        || (faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[2][0].color==WHITE)){//blue and orange faces
+        run_move("L' D' L D", faces);
+        printf("C");
+    }
+
+    if ((   faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == WHITE && faces[2].colors[0][0].color==faces[4].colors[1][1].color)
+        || (faces[4].colors[2][2].color == WHITE           && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[0][0].color==faces[0].colors[1][1].color)
+        || (faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[0][0].color==WHITE)){//orange and green faces
+        run_move("F' D' F D", faces);
+        printf("D");
+    }
+                
+    if((faces[3].colors[0][0].color!=WHITE || faces[3].colors[0][1].color!=WHITE || faces[3].colors[0][2].color!=WHITE 
+    || faces[3].colors[1][0].color!=WHITE || faces[3].colors[1][1].color!=WHITE || faces[3].colors[1][2].color!=WHITE 
+    || faces[3].colors[2][0].color!=WHITE || faces[3].colors[2][1].color!=WHITE || faces[3].colors[2][2].color!=WHITE)){
+        run_move("D", faces);
+        printf("E"); //Boucle infini
+
+    //    place_corners(faces);
+    }
+
+}
+        
+    
+/*
+        }
+        int next_face = get_next_face(j);
+
+        Color current_bottom_right = faces[j].colors[2][2].color;
+        Color next_main_color = faces[next_face].colors[1][1].color;
         Color next_face_top_right = faces[next_face].colors[0][2].color;
-        Color current_main_color = faces[i].main_color;
+        Color current_main_color = faces[j].colors[1][1].color;
+
 
         if ((   current_bottom_right == next_main_color && next_face_top_right == WHITE)
             || (current_bottom_right == WHITE           && next_face_top_right == current_main_color)
-            || (current_bottom_right == next_main_color && next_face_top_right == current_main_color))
-            run_move("R' D' R D", faces);
-        else
-            run_move("D", faces);
+            || (current_bottom_right == next_main_color && next_face_top_right == current_main_color)){
+                printf("HIII");
+                run_move("U", faces);
+        }
     }
-}
+}*/
+
+
 
 void solve_crown(Face faces[6]) {
     int top_edges[6][2] = {
@@ -568,8 +632,60 @@ void solve_crown(Face faces[6]) {
     }
 }
 
-void make_yellow_cross() {}
+void make_yellow_cross(Face faces[6]) {
+
+//    while(faces[2].colors[0][1].color !=YELLOW && faces[2].colors[1][0].color !=YELLOW && faces[2].colors[1][1].color !=YELLOW 
+//            && faces[2].colors[1][2].color !=YELLOW && faces[2].colors[2][1].color !=YELLOW){
+
+
+        if (faces[2].colors[1][1].color== YELLOW && faces[2].colors[0][1].color==YELLOW && faces[2].colors[1][0].color==YELLOW 
+        || faces[2].colors[1][1].color==YELLOW && faces[2].colors[0][1].color==YELLOW && faces[2].colors[1][2].color==YELLOW
+        || faces[2].colors[1][1].color==YELLOW && faces[2].colors[1][0].color==YELLOW && faces[2].colors[2][1].color==YELLOW
+        || faces[2].colors[1][1].color==YELLOW && faces[2].colors[1][2].color==YELLOW && faces[2].colors[2][1].color==YELLOW){//case of yellow L
+            run_move(" Z Z R' U' F' U F R Z Z", faces);
+        }
+
+        else if ((faces[2].colors[1][0].color==YELLOW && faces[2].colors[1][1].color==YELLOW && faces[2].colors[1][2].color==YELLOW) 
+        || (faces[2].colors[0][1].color==YELLOW && faces[2].colors[1][1].color==YELLOW && faces[2].colors[2][1].color==YELLOW)){//case of the yellow line
+            printf("If du LINE");
+            run_move("Z Z F R U R' U' F'Z Z", faces);
+        }
+
+        else if (faces[2].colors[1][1].color==YELLOW){ //case of 1 point
+            run_move("Z Z R' U' F' U F R F R U R' U' F' Z Z", faces);
+            if (faces[2].colors[0][1].color!= YELLOW && faces[2].colors[1][0].color!= YELLOW || faces[2].colors[1][1].color //we verify
+                != YELLOW || faces[2].colors[1][2].color!= YELLOW || faces[2].colors[2][1].color!=YELLOW){
+                    make_yellow_cross(faces);
+            }
+        }
+}
+
+
 void place_yellow_edges() {}
+    /*while (faces[0].colors[2][1].color!=faces[0].colors[1][1].color 
+        && faces[1].colors[2][1].color!=faces[0].colors[1][1].color){
+            rotate_cube_y(faces);
+            run_move("U", faces);
+    }
+
+        if (faces[2].colors[0][1].color==YELLOW && faces[2].colors[1][0].color==YELLOW && faces[2].colors[1][1].color==YELLOW 
+        && faces[2].colors[1][2].color==YELLOW && faces[2].colors[2][1].color==YELLOW 
+        && faces[1].colors[2][1].color==faces[1].colors[1][1].color && faces[4].colors[2][1].color==faces[4].colors[1][1].color) {
+            run_move("Z Z R U U R' U' R U' R' U' Z Z", faces);
+    }
+
+                || (faces[1].colors[2][1].color==faces[1].colors[1][1].color && faces[4].colors[2][1].color==faces[4].colors[1][1].color)
+                || (faces[5].colors[2][1].color==faces[5].colors[1][1].color && faces[0].colors[2][1].color==faces[0].colors[1][1].color))){
+
+    
+    if (faces[2].colors[0][1].color==YELLOW && faces[2].colors[1][0].color==YELLOW && faces[2].colors[1][1].color==YELLOW 
+        && faces[2].colors[1][2].color==YELLOW && faces[2].colors[2][1].color==YELLOW
+        && ((faces[0].colors[2][1].color==faces[0].colors[1][1].color && faces[1].colors[2][1].color==faces[1].colors[1][1].color) 
+            || (faces[4].colors[2][1].color==faces[4].colors[1][1].color && faces[5].colors[2][1].color==faces[5].colors[1][1].color)){
+            run_move("Z Z R U U R' U' R U' R' Z Z", faces);            
+    }
+    
+}*/
 void place_yellow_corners() {}
 void solve_yellow_corners() {}
 
@@ -578,7 +694,7 @@ void solve_cube(Face faces[6]) {
     place_corners(faces);
     solve_crown(faces);
 
-    make_yellow_cross();
+    make_yellow_cross(faces);
     place_yellow_edges();
     place_yellow_corners();
     solve_yellow_corners();
