@@ -335,13 +335,6 @@ bool includes(Color arr[3], Color value) {
 }
 
 void place_yellow_corners(Face faces[6]) {
-    // 0=front, 1=back, 2=down, 3=up, 4=left, 5=right
-    // If all the corners are well placed
-    typedef struct {
-        Color colors[3];
-        bool is_placed;
-    } Corner;
-
     Color top_lft_colors[3] = { faces[2].colors[0][0].color, faces[0].colors[2][0].color, faces[4].colors[2][2].color };
     Color top_rgt_colors[3] = { faces[2].colors[0][2].color, faces[0].colors[2][2].color, faces[5].colors[2][0].color };
     Color bot_lft_colors[3] = { faces[2].colors[2][0].color, faces[4].colors[2][0].color, faces[1].colors[2][2].color };
@@ -362,20 +355,15 @@ void place_yellow_corners(Face faces[6]) {
         return;
     }
 
-    // if (is_top_lft_placed || is_bot_lft_placed)
-    //     run_move()
-    // }
+    if (is_top_lft_placed)
+        run_move("Y Y", faces);
+    if (is_top_rgt_placed)
+        run_move("Y'", faces);
+    if (is_bot_lft_placed)
+        run_move("Y", faces);
 
-    // At this point, only 1 corner is well placed. We need to put it toward the bottom
-    // Corner corners[4] = {
-    //     { .colors = top_lft_colors, .is_placed = is_top_lft_placed },
-    //     { .colors = top_rgt_colors, .is_placed = is_top_rgt_placed },
-    //     { .colors = bot_lft_colors, .is_placed = is_bot_lft_placed },
-    //     { .colors = bot_rgt_colors, .is_placed = is_bot_rgt_placed },
-    // };
-    // for (int i = 0; i < 4; i++) {
-
-    // }
+    run_move("ZZYY L' U R U' L U R' U' YYZZ", faces);
+    place_yellow_corners(faces);
 }
 
 void solve_yellow_corners() {}
