@@ -394,53 +394,6 @@ bool has_perfect_white_cross(Face faces[6]) {
     ;
 }
 
-void make_white_cross(Face faces[6]) {
-    if (faces[3].colors[0][1].color == WHITE
-        && faces[3].colors[1][0].color == WHITE
-        && faces[3].colors[1][2].color == WHITE
-        && faces[3].main_color == WHITE
-        && faces[3].colors[2][1].color == GREEN
-        && faces[0].colors[0][1].color == WHITE
-        && faces[0].main_color == GREEN
-        && faces[5].colors[0][1].color == RED
-        && faces[5].main_color == RED)
-        run_move("F U' R U", faces);
-
-    if (faces[3].colors[0][1].color == WHITE
-        && faces[3].colors[1][0].color == WHITE
-        && faces[3].colors[1][2].color == WHITE
-        && faces[0].main_color == GREEN
-        && faces[0].colors[2][1].color == WHITE
-        && faces[5].colors[0][1].color == RED
-        && faces[5].main_color == RED)
-        run_move("F' R' D' R F F", faces);
-
-    if (faces[3].colors[0][1].color == WHITE
-        && faces[3].colors[1][0].color == WHITE
-        && faces[3].main_color == WHITE
-        && faces[3].colors[1][2].color == WHITE
-        && faces[0].main_color == GREEN
-        && faces[0].colors[1][2].color == WHITE
-        && faces[5].colors[0][1].color == RED
-        && faces[5].main_color == RED
-        && faces[5].colors[1][0].color == GREEN)
-        run_move("R' D' R F F", faces);
-
-    if (faces[3].main_color == WHITE
-        && faces[3].colors[2][1].color == RED
-        && faces[0].colors[0][1].color == WHITE
-        && faces[0].main_color == GREEN
-        && faces[5].main_color == RED)
-        run_move("F R", faces);
-
-    if (faces[3].main_color == WHITE
-        && faces[3].colors[1][2].color == ORANGE
-        && faces[0].main_color == GREEN
-        && faces[5].main_color == RED
-        && faces[5].colors[0][1].color == WHITE)
-        run_move("R' F' U", faces);
-}
-
 int get_next_face(int index) {
     switch(index) {
         case 0: return 5;
@@ -458,6 +411,56 @@ int get_previous_face(int index){
         case 4: return 1;
         case 5: return 0;
         default: return -1;
+    }
+}
+
+void make_white_cross(Face faces[6]) {
+    // 0=front, 1=back, 2=down, 3=up, 4=left, 5=right
+
+    bool white_on_top = faces[3].main_color == WHITE;
+    bool has_half_cross = white_on_top
+        && faces[3].colors[0][1].color == WHITE
+        && faces[3].colors[1][0].color == WHITE
+        && faces[3].colors[1][2].color == WHITE
+        && faces[4].colors[0][1].color == faces[4].colors[1][1].color
+        && faces[5].colors[0][1].color == faces[5].colors[1][1].color
+        && faces[1].colors[0][1].color == faces[1].colors[1][1].color;
+
+    for (int i = 0; i < 4; i++) {
+        // If we have 3 out of 4 white edges placed, and the fourth edge is inversed
+        if (has_half_cross
+            && faces[0].colors[0][1].color == WHITE
+            && faces[3].colors[2][1].color == faces[0].main_color)
+            run_move("F U' R U", faces);
+        // If we have 3 out of 4 white edges placed, and the fourth one is on the front face at the bottom
+        else if (has_half_cross && faces[0].colors[2][1].color == WHITE)
+            run_move("F' R' D' R F F", faces);
+        // If we have 3 out of 4 white edges placed, and the fourth one is on the from face on the right
+        else if (has_half_cross
+            && faces[0].colors[1][2].color == WHITE
+            && faces[5].colors[1][0].color == faces[0].main_color)
+            run_move("R' D' R F F", faces);
+        // Mirror of the previous
+        else if (has_half_cross
+            && faces[0].colors[1][0].color == WHITE
+            && faces[4].colors[1][2].color == faces[0].main_color)
+            run_move("R' D' R F F", faces);
+        // If an edge piece is on the upper face on the bottom, inversed, and on the left of its main face
+        else if (white_on_top
+            && faces[3].colors[2][1].color == faces[5].main_color
+            && faces[0].colors[0][1].color == faces[3].main_color)
+            run_move("F R", faces);
+        // If an edge piece is on the upper face on the right, inversed and at the opposite of its main face
+        else if (white_on_top
+            && faces[3].colors[1][2].color == faces[4].main_color
+            && faces[5].colors[0][1].color == WHITE)
+            run_move("R' F' U", faces);
+        // Mirror of the previous
+        else if (white_on_top
+            && faces[3].colors[1][0].color == faces[5].main_color
+            && faces[4].colors[0][1].color == WHITE)
+            run_move("L F U'", faces);
+        run_move("Y", faces);
     }
 }
 
