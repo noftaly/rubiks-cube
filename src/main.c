@@ -47,7 +47,7 @@ int main() {
     char input[100];
 
     while (strcmp(input, "end") != 0) {
-        puts("Enter what to do: 'reset', 'define', 'scramble', 'solve' or a valid move/sequence of move.");
+        puts("Enter what to do: 'reset', 'define', 'scramble', 'solve', 'test' or a valid move/sequence of move.");
         scanf("%s", input);
         if (strcmp(input, "reset") == 0)
             create_cube(faces);
