@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "rubiks.h"
+#include "solve.h"
 
 // Basic movements
 Face move_expected_1[6] = {
