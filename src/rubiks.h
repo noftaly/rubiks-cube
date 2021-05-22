@@ -51,7 +51,7 @@ void solve_cube();
 void make_white_cross(Face[6]);
 void place_corners(Face[6]);
 void solve_crown(Face[6]);
-void make_yellow_cross();
+void make_yellow_cross(Face[6]);
 void place_yellow_edges();
 void place_yellow_corners();
 void solve_yellow_corners();
