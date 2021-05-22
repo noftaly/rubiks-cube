@@ -4,3 +4,4 @@ main
 main.o
 cmake-build-debug
 src/main.exe
+src/rubiks.exe
