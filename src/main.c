@@ -10,34 +10,34 @@ int main() {
 
     Face faces[6] = {
         { .colors = {
-            { { .color = ORANGE }, { .color = GREEN }, { .color = YELLOW } },
-            { { .color = RED }, { .color = GREEN }, { .color = GREEN } },
-            { { .color = RED }, { .color = BLUE }, { .color = WHITE } },
+            { { .color = YELLOW }, { .color = GREEN }, { .color = GREEN } },
+            { { .color = GREEN }, { .color = GREEN }, { .color = YELLOW } },
+            { { .color = WHITE }, { .color = YELLOW }, { .color = YELLOW } },
         } },
         { .colors = {
-            { { .color = ORANGE }, { .color = BLUE }, { .color = RED } },
-            { { .color = BLUE }, { .color = BLUE }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = ORANGE }, { .color = RED } },
+            { { .color = BLUE }, { .color = BLUE }, { .color = BLUE } },
+            { { .color = YELLOW }, { .color = BLUE }, { .color = ORANGE } },
+            { { .color = GREEN }, { .color = BLUE }, { .color = WHITE } },
         } },
         { .colors = {
-            { { .color = GREEN }, { .color = ORANGE }, { .color = BLUE } },
-            { { .color = GREEN }, { .color = YELLOW }, { .color = GREEN } },
-            { { .color = BLUE }, { .color = YELLOW }, { .color = ORANGE } },
+            { { .color = BLUE }, { .color = BLUE }, { .color = ORANGE } },
+            { { .color = GREEN }, { .color = YELLOW }, { .color = RED } },
+            { { .color = GREEN }, { .color = ORANGE }, { .color = RED } },
         } },
         { .colors = {
-            { { .color = YELLOW }, { .color = WHITE }, { .color = BLUE } },
+            { { .color = WHITE }, { .color = WHITE }, { .color = RED } },
             { { .color = WHITE }, { .color = WHITE }, { .color = WHITE } },
-            { { .color = GREEN }, { .color = WHITE }, { .color = RED } },
+            { { .color = GREEN }, { .color = WHITE }, { .color = ORANGE } },
         } },
         { .colors = {
-            { { .color = GREEN }, { .color = ORANGE }, { .color = WHITE } },
-            { { .color = RED }, { .color = ORANGE }, { .color = BLUE } },
-            { { .color = WHITE }, { .color = RED }, { .color = WHITE } },
+            { { .color = ORANGE }, { .color = ORANGE }, { .color = ORANGE } },
+            { { .color = YELLOW }, { .color = ORANGE }, { .color = RED } },
+            { { .color = RED }, { .color = ORANGE }, { .color = RED } },
         } },
         { .colors = {
-            { { .color = BLUE }, { .color = RED }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = RED }, { .color = YELLOW } },
-            { { .color = ORANGE }, { .color = ORANGE }, { .color = GREEN } },
+            { { .color = WHITE }, { .color = RED }, { .color = YELLOW } },
+            { { .color = GREEN }, { .color = RED }, { .color = RED } },
+            { { .color = BLUE }, { .color = BLUE }, { .color = YELLOW } },
         } },
     };
 

@@ -486,65 +486,107 @@ void place_corners(Face faces[6]) {
             || faces[3].colors[1][0].color!=WHITE || faces[3].colors[1][1].color!=WHITE || faces[3].colors[1][2].color!=WHITE 
             || faces[3].colors[2][0].color!=WHITE || faces[3].colors[2][1].color!=WHITE || faces[3].colors[2][2].color!=WHITE){*/
 
-    if ((   faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == WHITE && faces[2].colors[0][2].color==faces[0].colors[1][1].color)
-        || (faces[0].colors[2][2].color == WHITE           && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color==faces[5].colors[1][1].color)
-        || (faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color==WHITE)){
-        //||(faces[0].colors[2][2].color == )){// green and red faces
+    if (   (faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == WHITE && faces[2].colors[0][2].color==faces[0].colors[1][1].color)
+        || (faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color==WHITE)
+
+        || (faces[0].colors[2][2].color == WHITE && faces[5].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[0][2].color == faces[0].colors[1][1].color)
+        || (faces[0].colors[2][2].color == WHITE && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color == faces[5].colors[1][1].color)
+
+        || (faces[0].colors[2][2].color == faces[0].colors[1][1].color && faces[5].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[0][2].color == WHITE)
+        || (faces[0].colors[2][2].color == faces[0].colors[1][1].color && faces[5].colors[2][0].color == WHITE && faces[2].colors[0][2].color == faces[5].colors[1][1].color)  // green and red faces
+        //All the possible combinations on face DOWN
+
+        || (faces[0].colors[0][2].color == faces[5].colors[1][1].color && faces[5].colors[0][0].color == WHITE && faces[3].colors[2][2].color==faces[0].colors[1][1].color)
+        || (faces[0].colors[0][2].color == faces[5].colors[1][1].color && faces[5].colors[0][0].color == faces[0].colors[1][1].color && faces[3].colors[2][2].color==WHITE)
+
+        || (faces[0].colors[0][2].color == WHITE && faces[5].colors[0][0].color == faces[5].colors[1][1].color && faces[3].colors[2][2].color == faces[0].colors[1][1].color)
+        || (faces[0].colors[0][2].color == WHITE && faces[5].colors[0][0].color == faces[0].colors[1][1].color && faces[3].colors[2][2].color == faces[5].colors[1][1].color)
+
+        || (faces[0].colors[0][2].color == faces[0].colors[1][1].color && faces[5].colors[0][0].color == WHITE && faces[3].colors[2][2].color == faces[5].colors[1][1].color)  ){// green and red faces
+        //All the possible combinations on face UP
+
         run_move("R' D' R D", faces);
-        printf("A");
+
+
     }
-            
-    if ((   faces[5].colors[2][2].color == faces[1].colors[1][1].color && faces[1].colors[2][0].color == WHITE && faces[2].colors[2][2].color==faces[5].colors[1][1].color)
-        || (faces[5].colors[2][2].color == WHITE  && faces[1].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[2][2].color==faces[1].colors[1][1].color)
-        || (faces[5].colors[2][2].color == faces[1].colors[1][1].color && faces[1].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[2][2].color==WHITE)){//red and blue faces
+    if (   (faces[5].colors[2][2].color == faces[1].colors[1][1].color && faces[1].colors[2][0].color == WHITE && faces[2].colors[2][2].color==faces[5].colors[1][1].color)
+        || (faces[5].colors[2][2].color == faces[1].colors[1][1].color && faces[1].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[2][2].color==WHITE)
+
+        || (faces[5].colors[2][2].color == WHITE && faces[1].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[2][2].color == faces[1].colors[1][1].color)
+        || (faces[5].colors[2][2].color == WHITE && faces[1].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[2][2].color == faces[5].colors[1][1].color)
+
+        || (faces[5].colors[2][2].color == faces[5].colors[1][1].color && faces[1].colors[2][0].color == WHITE && faces[2].colors[2][2].color == faces[1].colors[1][1].color)
+        || (faces[5].colors[2][2].color == faces[5].colors[1][1].color && faces[1].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[2][2].color == WHITE)  // red and blue faces
+        //All the possible combinations on face DOWN
+
+        || (faces[5].colors[0][2].color == faces[1].colors[1][1].color && faces[1].colors[0][0].color == WHITE && faces[3].colors[0][2].color==faces[5].colors[1][1].color)
+        || (faces[5].colors[0][2].color == faces[1].colors[1][1].color && faces[1].colors[0][0].color == faces[5].colors[1][1].color && faces[3].colors[0][2].color==WHITE)
+
+        || (faces[5].colors[0][2].color == WHITE && faces[1].colors[0][0].color == faces[5].colors[1][1].color && faces[3].colors[0][2].color == faces[1].colors[1][1].color)
+        || (faces[5].colors[0][2].color == WHITE && faces[1].colors[0][0].color == faces[1].colors[1][1].color && faces[3].colors[0][2].color == faces[5].colors[1][1].color)
+
+        || (faces[5].colors[0][2].color == faces[5].colors[1][1].color && faces[1].colors[0][0].color == WHITE && faces[3].colors[2][2].color == faces[1].colors[1][1].color)  ){
+        //All the possible combinations on face UP
+
         run_move("B' D' B D", faces);
-        printf("B");
     }
 
-    if ((   faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == WHITE && faces[2].colors[2][0].color==faces[1].colors[1][1].color)
-        || (faces[1].colors[2][2].color == WHITE           && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[2][0].color==faces[4].colors[1][1].color)
-        || (faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[2][0].color==WHITE)){//blue and orange faces
+
+    if (   (faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == WHITE && faces[2].colors[2][0].color==faces[1].colors[1][1].color)
+        || (faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[0][2].color==WHITE)
+
+        || (faces[1].colors[2][2].color == WHITE && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[2].colors[2][0].color == faces[4].colors[1][1].color)
+        || (faces[1].colors[2][2].color == WHITE && faces[4].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[2][0].color == faces[1].colors[1][1].color)
+
+        || (faces[1].colors[2][2].color == faces[1].colors[1][1].color && faces[4].colors[2][0].color == WHITE && faces[2].colors[2][0].color == faces[4].colors[1][1].color)
+        || (faces[1].colors[2][2].color == faces[1].colors[1][1].color && faces[4].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[2][0].color == WHITE)  // blue and orange faces
+        //All the possible combinations on face DOWN
+        
+        || (faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == WHITE && faces[3].colors[0][0].color==faces[1].colors[1][1].color)
+        || (faces[1].colors[2][2].color == faces[4].colors[1][1].color && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[3].colors[0][0].color==WHITE)
+
+        || (faces[1].colors[2][2].color == WHITE && faces[4].colors[2][0].color == faces[1].colors[1][1].color && faces[3].colors[0][0].color == faces[4].colors[1][1].color)
+        || (faces[1].colors[2][2].color == WHITE && faces[4].colors[2][0].color == faces[4].colors[1][1].color && faces[3].colors[0][0].color == faces[1].colors[1][1].color)
+
+        || (faces[1].colors[2][2].color == faces[1].colors[1][1].color && faces[4].colors[2][0].color == WHITE && faces[3].colors[2][0].color == faces[4].colors[1][1].color)  ) {
+        //All the possible combinations on face UP
+        
         run_move("L' D' L D", faces);
-        printf("C");
     }
 
-    if ((   faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == WHITE && faces[2].colors[0][0].color==faces[4].colors[1][1].color)
-        || (faces[4].colors[2][2].color == WHITE           && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[0][0].color==faces[0].colors[1][1].color)
-        || (faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[0][0].color==WHITE)){//orange and green faces
+
+    if (   (faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == WHITE && faces[2].colors[0][0].color==faces[4].colors[1][1].color)
+        || (faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[0][0].color==WHITE)
+
+        || (faces[4].colors[2][2].color == WHITE && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[2].colors[0][0].color == faces[0].colors[1][1].color)
+        || (faces[4].colors[2][2].color == WHITE && faces[0].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][0].color == faces[4].colors[1][1].color)
+
+        || (faces[4].colors[2][2].color == faces[4].colors[1][1].color && faces[0].colors[2][0].color == WHITE && faces[2].colors[0][0].color == faces[0].colors[1][1].color)
+        || (faces[4].colors[2][2].color == faces[4].colors[1][1].color && faces[0].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][0].color == WHITE)  //orange and green faces
+        //All the possible combinations on face DOWN
+
+        || (faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == WHITE && faces[3].colors[0][2].color==faces[4].colors[1][1].color)
+        || (faces[4].colors[2][2].color == faces[0].colors[1][1].color && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[3].colors[0][2].color==WHITE)
+
+        || (faces[4].colors[2][2].color == WHITE && faces[0].colors[2][0].color == faces[4].colors[1][1].color && faces[3].colors[0][2].color == faces[0].colors[1][1].color)
+        || (faces[4].colors[2][2].color == WHITE && faces[0].colors[2][0].color == faces[0].colors[1][1].color && faces[3].colors[0][2].color == faces[4].colors[1][1].color)
+
+        || (faces[4].colors[2][2].color == faces[4].colors[1][1].color && faces[0].colors[2][0].color == WHITE && faces[3].colors[0][0].color == faces[0].colors[1][1].color)   ){
+        //All the possible combinations on face UP
+
+
         run_move("F' D' F D", faces);
-        printf("D");
     }
+
                 
     if((faces[3].colors[0][0].color!=WHITE || faces[3].colors[0][1].color!=WHITE || faces[3].colors[0][2].color!=WHITE 
     || faces[3].colors[1][0].color!=WHITE || faces[3].colors[1][1].color!=WHITE || faces[3].colors[1][2].color!=WHITE 
     || faces[3].colors[2][0].color!=WHITE || faces[3].colors[2][1].color!=WHITE || faces[3].colors[2][2].color!=WHITE)){
         run_move("D", faces);
-        printf("E"); //Boucle infini
 
-    //    place_corners(faces);
+        place_corners(faces);
     }
-
 }
-        
-    
-/*
-        }
-        int next_face = get_next_face(j);
-
-        Color current_bottom_right = faces[j].colors[2][2].color;
-        Color next_main_color = faces[next_face].colors[1][1].color;
-        Color next_face_top_right = faces[next_face].colors[0][2].color;
-        Color current_main_color = faces[j].colors[1][1].color;
-
-
-        if ((   current_bottom_right == next_main_color && next_face_top_right == WHITE)
-            || (current_bottom_right == WHITE           && next_face_top_right == current_main_color)
-            || (current_bottom_right == next_main_color && next_face_top_right == current_main_color)){
-                printf("HIII");
-                run_move("U", faces);
-        }
-    }
-}*/
 
 
 
