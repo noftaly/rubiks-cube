@@ -117,10 +117,12 @@ Color ask_color(Face faces[6], int row, int col, int color_counter[9]) {
     return clr;
 }
 
-void define_cube(Face faces[6]) {
+void blank_cube(Face faces[6]) {
     for (int i = 0; i < 6; i++)
         create_face(&faces[i], UNSET);
+}
 
+void define_cube(Face faces[6]) {
     char* name_face[6] = { "up", "down", "right", "left", "front", "back" };
     int color_counter[] = { 9, 9, 9, 9, 9, 9 };
     while (true) {
@@ -204,6 +206,21 @@ void display_cube(Face faces[6]) {
     printf("          %s  %s  %s\n", to_char(faces[2].colors[0][0].color), to_char(faces[2].colors[0][1].color), to_char(faces[2].colors[0][2].color));
     printf("          %s  %s  %s\n", to_char(faces[2].colors[1][0].color), to_char(faces[2].main_color), to_char(faces[2].colors[1][2].color));
     printf("          %s  %s  %s\n", to_char(faces[2].colors[2][0].color), to_char(faces[2].colors[2][1].color), to_char(faces[2].colors[2][2].color));
+}
+
+void display_help() {
+    puts("Here are all of the available parts moves:");
+    puts("  - \e[1;33mU\e[0m & \e[1;33mU'\e[0m: turn the \e[4;37mupper\e[0m face clockwise/counterclockwise");
+    puts("  - \e[1;33mD\e[0m & \e[1;33mD'\e[0m: turn the \e[4;37mdown\e[0m face clockwise/counterclockwise");
+    puts("  - \e[1;33mF\e[0m & \e[1;33mF'\e[0m: turn the \e[4;37mfront\e[0m face clockwise/counterclockwise");
+    puts("  - \e[1;33mB\e[0m & \e[1;33mB'\e[0m: turn the \e[4;37mback\e[0m face clockwise/counterclockwise");
+    puts("  - \e[1;33mR\e[0m & \e[1;33mR'\e[0m: turn the \e[4;37mright\e[0m face clockwise/counterclockwise");
+    puts("  - \e[1;33mL\e[0m & \e[1;33mL'\e[0m: turn the \e[4;37mleft\e[0m face clockwise/counterclockwise");
+
+    puts("Here are all of the available cube moves:");
+    puts("  - \e[1;33mX\e[0m & \e[1;33mX'\e[0m: same as \e[4;37mR\e[0m but for the whole cube, clockwise or counterclockwise");
+    puts("  - \e[1;33mY\e[0m & \e[1;33mY'\e[0m: same as \e[4;37mU\e[0m but for the whole cube, clockwise or counterclockwise");
+    puts("  - \e[1;33mY\e[0m & \e[1;33mY'\e[0m: same as \e[4;37mF\e[0m but for the whole cube, clockwise or counterclockwise");
 }
 
 void scramble_cube(Face faces[6]) {

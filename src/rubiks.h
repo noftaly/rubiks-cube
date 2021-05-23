@@ -22,12 +22,15 @@ typedef struct {
 } Face;
 
 void create_face(Face*, Color);
+void blank_cube(Face[6]);
 void define_cube(Face[6]);
 void create_cube(Face[6]);
 void reorient_cube(Face[6]);
 
 void display_cube(Face[6]);
 void scramble_cube(Face[6]);
+
+void display_help();
 
 void run_move(const char* move, Face[6]);
 
