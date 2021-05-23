@@ -5,8 +5,6 @@
 #include "rubiks.h"
 #include "cube_tester.h"
 
-#include "solve.h"
-
 int main() {
     srand(time(NULL));
 

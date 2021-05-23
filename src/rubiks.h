@@ -33,4 +33,5 @@ void scramble_cube(Face[6]);
 
 void run_move(const char* move, Face[6]);
 
+int prompt_stop(Face faces[6], char* move_name);
 void solve_cube(Face[6]);
