@@ -231,8 +231,9 @@ void reorient_cube(Face faces[6]) {
 int prompt_stop(Face faces[6], char* move_name) {
     int result;
     display_cube(faces);
-    printf("Finished: %s.\nEnter 1 if you want to do a movement or 0 if the computer continue: ", move_name);
-    scanf(" %d", &result);
+    printf("Finished: \e[4;37m%s\e[0m.\nEnter 1 to continue on your own or 0 to let the computer go to the next step:\n\e[0;90m> ", move_name);
+    scanf("%d", &result);
+    printf("\e[0m");
     return result;
 }
 

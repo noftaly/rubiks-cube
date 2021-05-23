@@ -47,8 +47,10 @@ int main() {
     char input[100];
 
     while (strcmp(input, "end") != 0) {
-        puts("Enter what to do: 'reset', 'define', 'scramble', 'solve', 'test' or a valid move/sequence of move.");
+        puts("Enter what to do: '\e[1;93mreset\e[0m', '\e[1;93mdefine\e[0m', '\e[1;93mscramble\e[0m', '\e[1;93msolve\e[0m' or a valid \e[1;93mmove/sequence\e[0m of move.");
+        printf("\e[0;90m> ");
         scanf("%s", input);
+        printf("\e[0m");
         if (strcmp(input, "reset") == 0)
             create_cube(faces);
         else if (strcmp(input, "define") == 0)
