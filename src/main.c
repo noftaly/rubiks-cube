@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include "rubiks.h"
-#include "cube_tester.h"
+
 
 int main() {
     srand(time(NULL));
@@ -57,8 +57,6 @@ int main() {
             scramble_cube(faces);
         else if (strcmp(input, "solve") == 0)
             solve_cube(faces);
-        else if (strcmp(input, "test") == 0)
-            printf("Test result: %s\n", test_many(faces) ? "success" : "failed");
         else
             run_move(input, faces);
         display_cube(faces);
