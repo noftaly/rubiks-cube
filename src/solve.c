@@ -12,6 +12,16 @@ bool has_white_cross(Face faces[6]) {
         && faces[3].main_color == WHITE;
 }
 
+bool has_crown(Face faces[6]) {
+    for (int i = 0; i < 6; i++) {
+        if (i == 2 || i == 3) continue;
+
+        if (faces[i].colors[1][0].color != faces[i].colors[1][1].color || faces[i].colors[1][1].color != faces[i].colors[1][2].color)
+            return false;
+    }
+    return true;
+}
+
 bool has_yellow_cross(Face faces[6]) {
     return faces[2].colors[0][1].color == YELLOW
         && faces[2].colors[1][0].color == YELLOW
@@ -145,53 +155,42 @@ void place_white_corners(Face faces[6]) {
                 //All the possible combinations on face UP
 
                 run_move("R' D' R D", faces);
-                
+
                 }
             else{
                 run_move("D", faces);
             }
-            
+
         }
         run_move("Y", faces);
     }
 }
 
 void solve_crown(Face faces[6]) {
-    int top_edges[6][2] = {
-        { 0, 1 },
-        { 2, 1 },
-        { -1, -1 }, // Up, no associeted move. Will never be called.
-        { -1, -1 }, // Down, same as up.
-        { 1, 0 },
-        { 1, 2 },
-    };
+    run_move("ZZ", faces);
+    while (!has_crown(faces)) {
+        for (int i = 0; i < 4; i++) {
+            if (faces[0].colors[0][1].color != faces[0].main_color) {
+                run_move("U", faces);
+                continue;
+            }
 
-    for (int i = 0; i < 6; i++) {
-        if (i == 2 || i == 3) continue;
-
-        int previous_face = get_previous_face(i);
-        int next_face = get_next_face(i);
-
-        int associated_top_edge_x = top_edges[i][0];
-        int associated_top_edge_y = top_edges[i][1];
-
-        Color top_edge = faces[2].colors[associated_top_edge_x][associated_top_edge_y].color;
-        Color previous_face_main_color = faces[previous_face].main_color;
-        Color current_face_main_color = faces[i].main_color;
-        Color next_face_main_color = faces[next_face].main_color;
-
-        if (faces[i].colors[2][1].color == current_face_main_color) {
-            if (top_edge == previous_face_main_color)
+            Color upper_edge = faces[3].colors[2][1].color;
+            if (upper_edge == faces[4].main_color)
                 run_move("U' L' U L U F U' F'", faces);
-            else if (top_edge == next_face_main_color)
+            else if (upper_edge == faces[5].main_color)
                 run_move("U R U' R' U' F' U F", faces);
-        } else {
-            run_move("D", faces);
+            else {
+                run_move("U", faces);
+                continue;
+            }
+            if (faces[0].colors[1][2].color == faces[5].main_color && faces[5].colors[1][0].color == faces[0].main_color)
+                run_move("U R U' R' U' F' U F U2 U R U' R' U' F' U F", faces);
+            break;
         }
-
-        if (faces[i].colors[1][2].color == next_face_main_color && faces[next_face].colors[1][0].color == current_face_main_color)
-            run_move("U R U' R' U' F' U F U2 U R U' R' U' F' U F", faces);
+        run_move("Y", faces);
     }
+    run_move("ZZ", faces);
 }
 
 void make_yellow_cross(Face faces[6]) {
