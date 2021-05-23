@@ -209,5 +209,5 @@ void solve_cube(Face faces[6]) {
     reorient_cube(faces);
     place_yellow_corners(faces);
     reorient_cube(faces);
-    solve_yellow_corners();
+    solve_yellow_corners(faces);
 }

@@ -368,4 +368,14 @@ void place_yellow_corners(Face faces[6]) {
     place_yellow_corners(faces);
 }
 
-void solve_yellow_corners() {}
+void solve_yellow_corners(Face faces[6]) {
+    run_move("ZZ", faces);
+    for (int i = 0; i < 4; i++) {
+        if (faces[5].colors[0][0].color == YELLOW)
+            run_move("R' D' R D   R' D' R D", faces);
+        if (faces[0].colors[0][2].color == YELLOW)
+            run_move("R' D' R D   R' D' R D   R' D' R D   R' D' R D", faces);
+        run_move("U'", faces);
+    }
+    run_move("ZZ", faces);
+}

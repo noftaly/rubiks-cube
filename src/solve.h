@@ -15,4 +15,4 @@ void solve_crown(Face[6]);
 void make_yellow_cross(Face[6]);
 void place_yellow_edges(Face[6]);
 void place_yellow_corners(Face[6]);
-void solve_yellow_corners();
+void solve_yellow_corners(Face[6]);
