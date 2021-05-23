@@ -21,8 +21,6 @@ typedef struct {
     Color main_color;
 } Face;
 
-Face front, back, down, up, left, right;
-
 void create_face(Face*, Color);
 void define_cube(Face[6]);
 void create_cube(Face[6]);

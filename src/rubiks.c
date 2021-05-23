@@ -161,14 +161,14 @@ char* to_char(Color color) {
         case YELLOW: return "\e[0;33mY\e[0m";
         case BLUE:   return "\e[0;34mB\e[0m";
         case WHITE:  return "\e[0;37mW\e[0m";
-        case ORANGE: return "\e[0;95mO\e[0m";
+        case ORANGE: return "\e[0;91mO\e[0m";
         default:     return "\e[0;90mU\e[0m"; // Grey
     }
 }
 
 void display_cube(Face faces[6]) {
     printf("          %s  %s  %s\n", to_char(faces[3].colors[0][0].color), to_char(faces[3].colors[0][1].color), to_char(faces[3].colors[0][2].color));
-    printf("          %s  %s  %s\n", to_char(faces[3].colors[1][0].color), to_char(faces[3].colors[1][1].color), to_char(faces[3].colors[1][2].color));
+    printf("          %s  %s  %s\n", to_char(faces[3].colors[1][0].color), to_char(faces[3].main_color), to_char(faces[3].colors[1][2].color));
     printf("          %s  %s  %s\n", to_char(faces[3].colors[2][0].color), to_char(faces[3].colors[2][1].color), to_char(faces[3].colors[2][2].color));
 
     printf("%s  %s  %s   %s  %s  %s   %s  %s  %s   %s  %s  %s\n",
@@ -178,10 +178,10 @@ void display_cube(Face faces[6]) {
         to_char(faces[1].colors[0][0].color), to_char(faces[1].colors[0][1].color), to_char(faces[1].colors[0][2].color)
     );
     printf("%s  %s  %s   %s  %s  %s   %s  %s  %s   %s  %s  %s\n",
-        to_char(faces[4].colors[1][0].color), to_char(faces[4].colors[1][1].color), to_char(faces[4].colors[1][2].color),
-        to_char(faces[0].colors[1][0].color), to_char(faces[0].colors[1][1].color), to_char(faces[0].colors[1][2].color),
-        to_char(faces[5].colors[1][0].color), to_char(faces[5].colors[1][1].color), to_char(faces[5].colors[1][2].color),
-        to_char(faces[1].colors[1][0].color), to_char(faces[1].colors[1][1].color), to_char(faces[1].colors[1][2].color)
+        to_char(faces[4].colors[1][0].color), to_char(faces[4].main_color), to_char(faces[4].colors[1][2].color),
+        to_char(faces[0].colors[1][0].color), to_char(faces[0].main_color), to_char(faces[0].colors[1][2].color),
+        to_char(faces[5].colors[1][0].color), to_char(faces[5].main_color), to_char(faces[5].colors[1][2].color),
+        to_char(faces[1].colors[1][0].color), to_char(faces[1].main_color), to_char(faces[1].colors[1][2].color)
     );
     printf("%s  %s  %s   %s  %s  %s   %s  %s  %s   %s  %s  %s\n",
         to_char(faces[4].colors[2][0].color), to_char(faces[4].colors[2][1].color), to_char(faces[4].colors[2][2].color),
@@ -191,7 +191,7 @@ void display_cube(Face faces[6]) {
     );
 
     printf("          %s  %s  %s\n", to_char(faces[2].colors[0][0].color), to_char(faces[2].colors[0][1].color), to_char(faces[2].colors[0][2].color));
-    printf("          %s  %s  %s\n", to_char(faces[2].colors[1][0].color), to_char(faces[2].colors[1][1].color), to_char(faces[2].colors[1][2].color));
+    printf("          %s  %s  %s\n", to_char(faces[2].colors[1][0].color), to_char(faces[2].main_color), to_char(faces[2].colors[1][2].color));
     printf("          %s  %s  %s\n", to_char(faces[2].colors[2][0].color), to_char(faces[2].colors[2][1].color), to_char(faces[2].colors[2][2].color));
 }
 

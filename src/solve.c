@@ -202,16 +202,14 @@ void make_yellow_cross(Face faces[6]) {
         return;
 
     // Yellow L
-    bool done_l = false;
     for (int i = 0; i < 4; i++) {
-        if (!done_l && faces[2].colors[0][1].color == YELLOW && faces[2].colors[1][0].color == YELLOW) {
+        if (faces[2].colors[0][1].color == YELLOW && faces[2].colors[1][0].color == YELLOW) {
             run_move("ZZYY R' U' F' U F R YYZZ", faces);
-            done_l = true;
+            reorient_cube(faces);
+            return;
         }
         run_move("Y", faces);
     }
-    if (done_l)
-        return;
 
     // Yellow horrizontal line
     if (faces[2].colors[1][0].color == YELLOW && faces[2].colors[1][2].color == YELLOW)
