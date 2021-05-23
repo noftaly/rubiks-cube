@@ -199,21 +199,46 @@ void reorient_cube(Face faces[6]) {
     }
 }
 
-void solve_cube(Face faces[6]) {
-    int result;
-
-    make_perfect_white_cross(faces);
+bool prompt_stop() {
+    bool result;
     puts("Do you want to make a movement or the computer continue? \n Enter 1 if you want to do a movement or 0 if the computer continue: "); //0 ordi, 1 client
     scanf(" %d", &result);
-    
+    return result;
+}
+
+void solve_cube(Face faces[6]) {
+    int result;
+    result = prompt_stop();
+    if (result)
+        make_perfect_white_cross(faces);
+
+    result = prompt_stop();
     if (result)
         place_white_corners(faces);
-    solve_crown(faces);
 
-    make_yellow_cross(faces);
-    place_yellow_edges(faces);
+    result = prompt_stop();
+    if (result)
+        solve_crown(faces);
+
+    result = prompt_stop();
+    if (result)
+        make_yellow_cross(faces);
+
+    result = prompt_stop();
+    if (result)
+        place_yellow_edges(faces);
+
     reorient_cube(faces);
-    place_yellow_corners(faces);
-    reorient_cube(faces);
-    solve_yellow_corners(faces);
+
+    result = prompt_stop();
+    if (result)
+        place_yellow_corners(faces);
+
+    result = prompt_stop();
+    if (result)
+        reorient_cube(faces);
+    
+    result = prompt_stop();
+    if (result)
+        solve_yellow_corners(faces);
 }
