@@ -200,8 +200,14 @@ void reorient_cube(Face faces[6]) {
 }
 
 void solve_cube(Face faces[6]) {
+    int result;
+
     make_perfect_white_cross(faces);
-    place_white_corners(faces);
+    puts("Do you want to make a movement or the computer continue? \n Enter 1 if you want to do a movement or 0 if the computer continue: "); //0 ordi, 1 client
+    scanf(" %d", &result);
+    
+    if (result)
+        place_white_corners(faces);
     solve_crown(faces);
 
     make_yellow_cross(faces);
