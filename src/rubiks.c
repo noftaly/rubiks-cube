@@ -90,38 +90,67 @@ void create_cube(Face faces[6]) {
     create_face(&faces[5], RED);
 }
 
-void define_cube(Face faces[6]) {
-    create_face(&faces[0], UNSET);
-    create_face(&faces[1], UNSET);
-    create_face(&faces[2], UNSET);
-    create_face(&faces[3], UNSET);
-    create_face(&faces[4], UNSET);
-    create_face(&faces[5], UNSET);
-
-    char* name_face[6] = { "up", "down", "right", "left", "front", "back" };
-
-    puts("You will have to enter each color (w,g,o,b,r,y,u) index by index.");
-    for (int face = 0; face < 6; face++) {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                Color color;
-                char input_color;
-                printf("Enter color for cube on face  \e[1;33m%s\e[0m  at position row=\e[1;33m%d\e[0m,col=\e[1;33m%d\e[0m: ", name_face[face], row+1, col+1);
-                scanf(" %c", &input_color);
-                switch (input_color) {
-                    case 'w': case 'W': color = WHITE; break;
-                    case 'g': case 'G': color = GREEN; break;
-                    case 'o': case 'O': color = ORANGE; break;
-                    case 'b': case 'B': color = BLUE; break;
-                    case 'r': case 'R': color = RED; break;
-                    case 'y': case 'Y': color = YELLOW; break;
-                    default: color = UNSET; break;
-                }
-                faces[face].colors[row][col] = (Cube){ .color = color };
-                if (row == col == 1)
-                    faces[face].main_color = color;
+Color ask_color(Face faces[6], int row, int col, int color_counter[9]) {
+    int clr = 0;
+    printf("\e[0;90m> ");
+    int scan_result = scanf("%d", &clr);
+    printf("\e[0m");
+    getchar();
+    while (!scan_result || clr < 0 || clr > 5){
+        puts("\e[0;31mInvalid color.\e[0m Please retry:");
+        return ask_color(faces, row, col, color_counter);
+    }
+    while (color_counter[clr] <= 0){
+        puts("\e[0;31mInvalid color.\e[0m Maximum frequency reached. Please retry:");
+        return ask_color(faces, row, col, color_counter);
+    }
+    if (row == 1 && col == 1){
+        for (int i = 0; i < 6; i++) {
+            while (faces[i].colors[row][col].color == clr) {
+                puts("\e[0;31mInvalid color.\e[0m Already center of another face. Please retry:");
+                return ask_color(faces, row, col, color_counter);
             }
         }
+    }
+    return clr;
+}
+
+void define_cube(Face faces[6]) {
+    for (int i = 0; i < 6; i++)
+        create_face(&faces[i], UNSET);
+
+    char* name_face[6] = { "up", "down", "right", "left", "front", "back" };
+    int color_counter[] = { 9, 9, 9, 9, 9, 9 };
+    while (true) {
+        puts("Enter face number: \e[1;34m0\e[0m=\e[1;34mfront\e[0m | \e[1;34m1\e[0m=\e[1;34mback\e[0m | \e[1;34m2\e[0m=\e[1;34mbottom\e[0m | \e[1;34m3\e[0m=\e[1;34mtop\e[0m | \e[1;34m4\e[0m=\e[1;34mleft\e[0m | \e[1;34m5\e[0m=\e[1;34mright\e[0m | \e[1;34m-1\e[0m to \e[1;34mquit\e[0m.");
+        int scan_result;
+        int face_index = 0;
+        printf("\e[0;90m> ");
+        scan_result = scanf("%d", &face_index);
+        printf("\e[0m");
+        getchar();
+        if (face_index == -1)
+            break;
+        while (!scan_result || face_index < 0 || face_index > 5){
+            puts("\e[0;31mInvalid face.\e[0m Please retry:");
+            scan_result = scanf("%d", &face_index);
+        }
+        puts("Enter \e[4;37mcube's coordinates\e[0m separated by a space. First the row, then the column: they are both comprised between 0 and 2 included. For example: '1 1' for the middle.");
+        int row = 0, col = 0;
+        printf("\e[0;90m> ");
+        scan_result = scanf("%d %d", &row, &col);
+        printf("\e[0m");
+        getchar();
+        while (!scan_result || row < 0 || row > 2 || col < 0 || col > 2){
+            puts("\e[0;31mInvalid coordinates.\e[0m Please retry:");
+            scan_result = scanf("%d %d", &row, &col);
+        }
+        puts("Enter color: \e[1;37m0\e[0m=\e[1;31mred\e[0;90m | \e[1;37m1\e[0m=\e[1;32mgreen\e[0;90m | \e[1;37m2\e[0m=\e[1;34mblue\e[0;90m | \e[1;37m3\e[0m=\e[1;33myellow\e[0;90m | \e[1;37m4\e[0m=\e[1;37mwhite\e[0;90m | \e[1;37m5\e[0m=\e[1;91morange\e[0m");
+        Color clr = ask_color(faces, row, col, color_counter);
+        color_counter[clr]--;
+        faces[face_index].colors[row][col].color = clr;
+        if (row == 1 && col == 1)
+            faces[face_index].main_color = clr;
     }
 }
 
