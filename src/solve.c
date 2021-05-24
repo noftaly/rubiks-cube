@@ -119,24 +119,34 @@ void make_perfect_white_cross(Face faces[6]) {
 
 void place_white_corners(Face faces[6]) {
 
+    Color front_top_right = faces[0].colors[0][2].color;
+    Color front_middle = faces[0].colors[1][1].color;
+    Color front_bottom_right = faces[0].colors[2][2].color;
+
+    Color right_top_left = faces[5].colors[0][0].color;
+    Color right_middle = faces[5].colors[1][1].color;
+    Color right_bottom_left = faces[5].colors[2][0].color;
+
+    Color up_top_left = faces[3].colors[0][0].color;
+    Color up_top_middle = faces[3].colors[0][1].color;
+    Color up_top_right = faces[3].colors[0][2].color;
+    Color up_middle_left = faces[3].colors[1][0].color;
+    Color up_middle = faces[3].colors[1][1].color;
+    Color up_middle_right = faces[3].colors[1][2].color;
+    Color up_bottom_left = faces[3].colors[2][0].color;
+    Color up_bottom_middle = faces[3].colors[2][1].color;
+    Color up_bottom_right = faces[3].colors[2][2].color;
+
+    Color down_top_right = faces[2].colors[0][2].color;
 
 
-    for (int j=0; j<4; j++) {
+    while (up_top_left != WHITE || up_top_middle != WHITE || up_top_right != WHITE
+        || up_middle_left != WHITE || up_middle != WHITE || up_middle_right != WHITE
+        || up_bottom_left != WHITE || up_bottom_middle != WHITE || up_bottom_right != WHITE) {
 
-        while(faces[0].colors[0][2].color != faces[0].colors[1][1].color || faces[5].colors[0][0].color != faces[5].colors[1][1].color || faces[3].colors[2][2].color != WHITE) {
+        //for (int J=0; J<4; J++){
 
-            Color front_top_right = faces[0].colors[0][2].color;
-            Color front_middle = faces[0].colors[1][1].color;
-            Color front_bottom_right = faces[0].colors[2][2].color;
-
-            Color right_top_left = faces[5].colors[0][0].color;
-            Color right_middle = faces[5].colors[1][1].color;
-            Color right_bottom_left = faces[5].colors[2][0].color;
-
-            Color up_bottom_right = faces[3].colors[2][2].color;
-            Color down_top_right = faces[2].colors[0][2].color;
-
-
+        for (int i = 0; i<8; i++){
             if (   (front_bottom_right == right_middle && right_bottom_left == WHITE && down_top_right == front_middle)
                 || (front_bottom_right == right_middle && right_bottom_left == front_middle && down_top_right == WHITE)
 
@@ -157,16 +167,28 @@ void place_white_corners(Face faces[6]) {
                 //All the possible combinations on face UP
 
                 run_move("R' D' R D", faces);
-
                 }
+            else if(   (right_top_left == WHITE && front_top_right != right_middle && up_bottom_right != front_middle)
+                    || (right_top_left == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
+
+                    || (front_top_right == WHITE && right_top_left != right_middle && up_bottom_right != front_middle)
+                    || (front_top_right == WHITE && right_top_left != front_middle && up_bottom_right != right_middle)
+
+                    || (up_bottom_right == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
+                    || (up_bottom_right == WHITE && front_top_right != front_middle && right_top_left != right_middle)  ){// green and red faces
+                run_move("R' D' R", faces);
+            }
             else{
                 run_move("D", faces);
             }
 
         }
-        run_move("Y", faces);
+        run_move("Y", faces);        
     }
+    run_move("Y'", faces);
 }
+
+
 void solve_crown(Face faces[6]) {
     run_move("ZZ", faces);
     while (!has_crown(faces)) {
