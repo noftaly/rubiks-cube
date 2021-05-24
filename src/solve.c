@@ -90,7 +90,7 @@ void rise_white_edge(Face faces[6], int iteration) {
     // If a cube is below
     if (faces[2].colors[0][1].color == WHITE)
         run_move("FF", faces);
-    // Of a cube is on the left
+    // If a cube is on the left
     else if (faces[4].colors[1][2].color == WHITE)
         run_move("F", faces);
     // If a cube is on the right
@@ -109,6 +109,10 @@ void rise_white_edge(Face faces[6], int iteration) {
     else if (faces[0].colors[0][1].color == WHITE)
         run_move("F U' R U", faces);
     else {
+        if (faces[5].colors[1][2].color == WHITE || faces[1].colors[1][0].color == WHITE)
+            run_move("B' D' B", faces);
+        else if (faces[4].colors[1][0].color == WHITE || faces[1].colors[1][2].color == WHITE)
+            run_move("B D B'", faces);
         run_move("D", faces);
         rise_white_edge(faces, iteration + 1);
     }
