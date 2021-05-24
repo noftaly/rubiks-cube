@@ -220,7 +220,7 @@ void display_help() {
     puts("Here are all of the available cube moves:");
     puts("  - \e[1;33mX\e[0m & \e[1;33mX'\e[0m: same as \e[4;37mR\e[0m but for the whole cube, clockwise or counterclockwise");
     puts("  - \e[1;33mY\e[0m & \e[1;33mY'\e[0m: same as \e[4;37mU\e[0m but for the whole cube, clockwise or counterclockwise");
-    puts("  - \e[1;33mY\e[0m & \e[1;33mY'\e[0m: same as \e[4;37mF\e[0m but for the whole cube, clockwise or counterclockwise");
+    puts("  - \e[1;33mZ\e[0m & \e[1;33mZ'\e[0m: same as \e[4;37mF\e[0m but for the whole cube, clockwise or counterclockwise");
 }
 
 void scramble_cube(Face faces[6]) {
