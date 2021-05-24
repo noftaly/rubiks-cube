@@ -8,47 +8,8 @@
 int main() {
     srand(time(NULL));
 
-    Face faces[6] = {
-        // Front
-        { .colors = {
-            { { .color = RED }, { .color = GREEN }, { .color = GREEN } },
-            { { .color = YELLOW }, { .color = GREEN }, { .color = ORANGE } },
-            { { .color = WHITE }, { .color = YELLOW }, { .color = RED } },
-        }, .main_color = GREEN },
-        // Back
-        { .colors = {
-            { { .color = ORANGE }, { .color = BLUE }, { .color = BLUE } },
-            { { .color = GREEN }, { .color = BLUE }, { .color = BLUE } },
-            { { .color = WHITE }, { .color = ORANGE }, { .color = RED } },
-        }, .main_color = BLUE },
-        // Down
-        { .colors = {
-            { { .color = GREEN }, { .color = ORANGE }, { .color = YELLOW } },
-            { { .color = WHITE }, { .color = YELLOW }, { .color = WHITE } },
-            { { .color = WHITE }, { .color = BLUE }, { .color = ORANGE } },
-        }, .main_color = YELLOW },
-        // Up
-        { .colors = {
-            { { .color = RED }, { .color = WHITE }, { .color = BLUE } },
-            { { .color = GREEN }, { .color = WHITE }, { .color = BLUE } },
-            { { .color = GREEN }, { .color = WHITE }, { .color = YELLOW } },
-        }, .main_color = WHITE },
-        // Left
-        { .colors = {
-            { { .color = WHITE }, { .color = YELLOW }, { .color = YELLOW } },
-            { { .color = YELLOW }, { .color = ORANGE }, { .color = RED } },
-            { { .color = GREEN }, { .color = ORANGE }, { .color = ORANGE } },
-        }, .main_color = ORANGE },
-        // Right
-        { .colors = {
-            { { .color = ORANGE }, { .color = RED }, { .color = YELLOW } },
-            { { .color = GREEN }, { .color = RED }, { .color = RED } },
-            { { .color = BLUE }, { .color = RED }, { .color = BLUE } },
-        }, .main_color = RED },
-    };
-
-    // Face faces[6];
-    // create_cube(faces);
+    Face faces[6];
+    create_cube(faces);
     display_cube(faces);
     char input[100];
 
