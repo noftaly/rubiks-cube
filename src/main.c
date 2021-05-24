@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 #include "rubiks.h"
 
 int main() {
@@ -52,7 +53,7 @@ int main() {
     char input[100];
 
     while (strcmp(input, "end") != 0) {
-        puts("Enter what to do: '\e[1;93mreset\e[0m', '\e[1;93mblank\e[0m', '\e[1;93mdefine\e[0m', '\e[1;93mscramble\e[0m', '\e[1;93msolve\e[0m', '\e[1;93mhelp\e[0m' or a valid \e[1;93mmove/sequence\e[0m of moves.");
+        puts("Enter what to do: '\e[1;93mreset\e[0m', '\e[1;93mblank\e[0m', '\e[1;93mdefine\e[0m', '\e[1;93mscramble\e[0m', '\e[1;93mfinish\e[0m', '\e[1;93msolve\e[0m', '\e[1;93mhelp\e[0m' or a valid \e[1;93mmove/sequence\e[0m of moves.");
         printf("\e[0;90m> ");
         scanf("%99[^\n]", input);
         getchar();
@@ -65,8 +66,10 @@ int main() {
             define_cube(faces);
         else if (strcmp(input, "scramble") == 0)
             scramble_cube(faces);
+        else if (strcmp(input, "finish") == 0)
+            solve_cube(faces, true);
         else if (strcmp(input, "solve") == 0)
-            solve_cube(faces);
+            solve_cube(faces, false);
         else if (strcmp(input, "help") == 0)
             display_help(faces);
         else

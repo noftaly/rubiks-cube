@@ -265,27 +265,32 @@ int prompt_stop(Face faces[6], char* move_name) {
     return result;
 }
 
-void solve_cube(Face faces[6]) {
-    make_perfect_white_cross(faces);
-    if (prompt_stop(faces, "white cross")) return;
+void solve_cube(Face faces[6], bool fast) {
+    make_white_cross(faces);
+    if (!fast && prompt_stop(faces, "white cross")) return;
+    if (!has_white_cross(faces))
+        return;
+
+    place_white_edges(faces);
+    if (!fast && prompt_stop(faces, "white edges")) return;
 
     place_white_corners(faces);
-    if (prompt_stop(faces, "white corners")) return;
+    if (!fast && prompt_stop(faces, "white corners")) return;
 
     solve_crown(faces);
     reorient_cube(faces);
-    if (prompt_stop(faces, "middle crown")) return;
+    if (!fast && prompt_stop(faces, "middle crown")) return;
 
     make_yellow_cross(faces);
-    if (prompt_stop(faces, "yellow cross")) return;
+    if (!fast && prompt_stop(faces, "yellow cross")) return;
 
     place_yellow_edges(faces);
     reorient_cube(faces);
-    if (prompt_stop(faces, "yellow edges")) return;
+    if (!fast && prompt_stop(faces, "yellow edges")) return;
 
     place_yellow_corners(faces);
     reorient_cube(faces);
-    if (prompt_stop(faces, "yellow corners placement")) return;
+    if (!fast && prompt_stop(faces, "yellow corners placement")) return;
 
     solve_yellow_corners(faces);
 }
