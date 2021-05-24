@@ -113,6 +113,10 @@ void make_perfect_white_cross(Face faces[6]) {
         else if (faces[3].colors[1][0].color == faces[5].main_color
             && faces[4].colors[0][1].color == WHITE)
             run_move("L F U'", faces);
+        // If the part is upside down
+        else if (faces[0].colors[2][1].color == faces[0].main_color
+            && faces[2].colors[0][1].color == WHITE)
+            run_move("FF", faces);
         run_move("Y", faces);
     }
 }
