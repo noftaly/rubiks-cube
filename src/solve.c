@@ -130,7 +130,6 @@ void make_white_cross(Face faces[6]) {
 }
 
 void place_white_edges(Face faces[6]) {
-    // 0=front, 1=back, 2=down, 3=up, 4=left, 5=right
     if (faces[3].main_color != WHITE) {
         puts("White is not on top of the cube. TODO: Move it there.");
         return;
@@ -205,11 +204,14 @@ void solve_crown(Face faces[6]) {
             }
 
             Color upper_edge = faces[3].colors[2][1].color;
-            if (upper_edge == faces[4].main_color)
+            if (upper_edge == faces[4].main_color) {
                 run_move("U' L' U L U F U' F'", faces);
-            else if (upper_edge == faces[5].main_color)
+            } else if (upper_edge == faces[5].main_color) {
                 run_move("U R U' R' U' F' U F", faces);
-            else {
+            } else {
+                // In case we noticed something unrelated but that can block the flow later on, we unblock it.
+                if (faces[0].colors[1][0].color != YELLOW && faces[4].colors[1][2].color != YELLOW)
+                    run_move("L' U L U F U' F'", faces);
                 run_move("U", faces);
                 continue;
             }
