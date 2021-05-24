@@ -53,6 +53,11 @@ bool has_perfect_yellow_cross(Face faces[6]) {
         && faces[5].colors[2][1].color == faces[5].main_color;
 }
 
+bool has_white_edge_on_down(Face faces[6]) {
+    return faces[2].colors[0][1].color == WHITE || faces[2].colors[1][0].color == WHITE || faces[2].colors[1][2].color == WHITE || faces[2].colors[2][1].color == WHITE
+        || faces[0].colors[2][1].color == WHITE || faces[5].colors[2][1].color == WHITE || faces[1].colors[2][1].color == WHITE || faces[4].colors[2][1].color == WHITE;
+}
+
 bool includes(Color arr[3], Color value) {
     for (int i = 0; i < 3; i++) {
         if (arr[i] == value)
@@ -109,10 +114,12 @@ void rise_white_edge(Face faces[6], int iteration) {
     else if (faces[0].colors[0][1].color == WHITE)
         run_move("F U' R U", faces);
     else {
-        if (faces[5].colors[1][2].color == WHITE || faces[1].colors[1][0].color == WHITE)
-            run_move("B' D' B", faces);
-        else if (faces[4].colors[1][0].color == WHITE || faces[1].colors[1][2].color == WHITE)
-            run_move("B D B'", faces);
+        if (!has_white_edge_on_down(faces)) {
+            if (faces[5].colors[1][2].color == WHITE || faces[1].colors[1][0].color == WHITE)
+                run_move("B' D' B", faces);
+            else if (faces[4].colors[1][0].color == WHITE || faces[1].colors[1][2].color == WHITE)
+                run_move("B D B'", faces);
+        }
         run_move("D", faces);
         rise_white_edge(faces, iteration + 1);
     }
