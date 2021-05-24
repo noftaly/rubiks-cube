@@ -209,6 +209,8 @@ void solve_crown(Face faces[6]) {
     int iteration = 0;
     while (iteration < 100 && !has_crown(faces)) {
         for (int i = 0; i < 4; i++) {
+            if (faces[0].colors[1][2].color == faces[5].main_color && faces[5].colors[1][0].color == faces[0].main_color)
+                run_move("U R U' R' U' F' U F U' R U' R' U' F' U F", faces);
             if (faces[0].colors[0][1].color != faces[0].main_color) {
                 run_move("U", faces);
                 continue;
@@ -226,8 +228,9 @@ void solve_crown(Face faces[6]) {
                 run_move("U", faces);
                 continue;
             }
+            // Pretty sure this can never happen, the one at the top of the loop should solve it.
             if (faces[0].colors[1][2].color == faces[5].main_color && faces[5].colors[1][0].color == faces[0].main_color)
-                run_move("U R U' R' U' F' U F U2 U R U' R' U' F' U F", faces);
+                run_move("U R U' R' U' F' U F U' R U' R' U' F' U F", faces);
             break;
         }
         run_move("Y", faces);
