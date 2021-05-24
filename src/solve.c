@@ -89,7 +89,6 @@ int get_previous_face(int index) {
 
 void rise_white_edge(Face faces[6], int iteration) {
     if (iteration > 20) {
-        puts("\e[1;31mUnsupported edge-case for white cross...");
         return;
     }
     // If a cube is below
@@ -207,7 +206,8 @@ void place_white_corners(Face faces[6]) {
 
 void solve_crown(Face faces[6]) {
     run_move("ZZ", faces);
-    while (!has_crown(faces)) {
+    int iteration = 0;
+    while (iteration < 100 && !has_crown(faces)) {
         for (int i = 0; i < 4; i++) {
             if (faces[0].colors[0][1].color != faces[0].main_color) {
                 run_move("U", faces);
@@ -231,6 +231,7 @@ void solve_crown(Face faces[6]) {
             break;
         }
         run_move("Y", faces);
+        iteration++;
     }
     run_move("ZZ", faces);
 }

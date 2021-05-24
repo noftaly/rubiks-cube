@@ -268,9 +268,11 @@ int prompt_stop(Face faces[6], char* move_name) {
 
 void solve_cube(Face faces[6], bool fast) {
     make_white_cross(faces);
-    if (!fast && prompt_stop(faces, "white cross")) return;
-    if (!has_white_cross(faces))
+    if (!has_white_cross(faces)) {
+        puts("\e[1;31mUnsupported edge-case for white cross...");
         return;
+    }
+    if (!fast && prompt_stop(faces, "white cross")) return;
 
     place_white_edges(faces);
     if (!fast && prompt_stop(faces, "white edges")) return;
@@ -280,6 +282,10 @@ void solve_cube(Face faces[6], bool fast) {
 
     solve_crown(faces);
     reorient_cube(faces);
+    if (!has_crown(faces)) {
+        puts("\e[1;31mUnsupported edge-case for crown...");
+        return;
+    }
     if (!fast && prompt_stop(faces, "middle crown")) return;
 
     make_yellow_cross(faces);

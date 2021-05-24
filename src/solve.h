@@ -4,10 +4,16 @@
 #include "rubiks.h"
 
 bool has_white_cross(Face[6]);
-bool has_perfect_white_cross(Face[6]);
-
+bool has_white_face(Face[6]);
+bool has_crown(Face[6]);
 bool has_yellow_cross(Face[6]);
+bool has_perfect_white_cross(Face[6]);
 bool has_perfect_yellow_cross(Face[6]);
+bool has_white_edge_on_down(Face[6]);
+bool includes(Color[3], Color);
+
+int get_next_face(int index);
+int get_previous_face(int index);
 
 void make_white_cross(Face[6]);
 void place_white_edges(Face[6]);
