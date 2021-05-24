@@ -261,6 +261,7 @@ int prompt_stop(Face faces[6], char* move_name) {
     display_cube(faces);
     printf("Finished: \e[4;37m%s\e[0m.\nEnter 1 to continue on your own or 0 to let the computer go to the next step:\n\e[0;90m> ", move_name);
     scanf("%d", &result);
+    getchar();
     printf("\e[0m");
     return result;
 }
