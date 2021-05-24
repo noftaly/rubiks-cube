@@ -54,7 +54,8 @@ int main() {
     while (strcmp(input, "end") != 0) {
         puts("Enter what to do: '\e[1;93mreset\e[0m', '\e[1;93mblank\e[0m', '\e[1;93mdefine\e[0m', '\e[1;93mscramble\e[0m', '\e[1;93msolve\e[0m', '\e[1;93mhelp\e[0m' or a valid \e[1;93mmove/sequence\e[0m of moves.");
         printf("\e[0;90m> ");
-        scanf("%s", input);
+        scanf("%99[^\n]", input);
+        getchar();
         printf("\e[0m");
         if (strcmp(input, "reset") == 0)
             create_cube(faces);
