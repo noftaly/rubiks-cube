@@ -140,42 +140,42 @@ void place_white_corners(Face faces[6]) {
     Color down_top_right = faces[2].colors[0][2].color;
 
 
-    while (up_top_left != WHITE || up_top_middle != WHITE || up_top_right != WHITE
-        || up_middle_left != WHITE || up_middle != WHITE || up_middle_right != WHITE
-        || up_bottom_left != WHITE || up_bottom_middle != WHITE || up_bottom_right != WHITE) {
+    while (faces[3].colors[0][0].color != WHITE || faces[3].colors[0][1].color != WHITE || faces[3].colors[0][2].color != WHITE
+        || faces[3].colors[1][0].color != WHITE || faces[3].colors[1][1].color != WHITE || faces[3].colors[1][2].color != WHITE
+        || faces[3].colors[2][0].color != WHITE || faces[3].colors[2][1].color != WHITE || faces[3].colors[2][2].color != WHITE) {
 
         //for (int J=0; J<4; J++){
 
         for (int i = 0; i<8; i++){
-            if (   (front_bottom_right == right_middle && right_bottom_left == WHITE && down_top_right == front_middle)
-                || (front_bottom_right == right_middle && right_bottom_left == front_middle && down_top_right == WHITE)
+            if (   (faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == WHITE && faces[2].colors[0][2].color == faces[0].colors[1][1].color)
+                || (faces[0].colors[2][2].color == faces[5].colors[1][1].color && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color == WHITE)
 
-                || (front_bottom_right == WHITE && right_bottom_left == right_middle && down_top_right  == front_middle)
-                || (front_bottom_right == WHITE && right_bottom_left == front_middle && down_top_right  == right_middle)
+                || (faces[0].colors[2][2].color == WHITE && faces[5].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[0][2].color  == faces[0].colors[1][1].color)
+                || (faces[0].colors[2][2].color == WHITE && faces[5].colors[2][0].color == faces[0].colors[1][1].color && faces[2].colors[0][2].color  == faces[5].colors[1][1].color)
 
-                || (front_bottom_right == front_middle && right_bottom_left == right_middle && down_top_right  == WHITE)
-                || (front_bottom_right == front_middle && right_bottom_left == WHITE && down_top_right  == right_middle)  // green and red faces
+                || (faces[0].colors[2][2].color == faces[0].colors[1][1].color && faces[5].colors[2][0].color == faces[5].colors[1][1].color && faces[2].colors[0][2].color  == WHITE)
+                || (faces[0].colors[2][2].color == faces[0].colors[1][1].color && faces[5].colors[2][0].color == WHITE && faces[2].colors[0][2].color  == faces[5].colors[1][1].color)  // green and red faces
                 //All the possible combinations on face DOWN
 
-                || (front_top_right == right_middle && right_top_left == WHITE && up_bottom_right == front_middle)
-                || (front_top_right == right_middle && right_top_left == front_middle && up_bottom_right == WHITE)
+                || (faces[0].colors[0][2].color == faces[5].colors[1][1].color && faces[5].colors[0][0].color == WHITE && faces[3].colors[2][2].color == faces[0].colors[1][1].color)
+                || (faces[0].colors[0][2].color == faces[5].colors[1][1].color && faces[5].colors[0][0].color == faces[0].colors[1][1].color && faces[3].colors[2][2].color == WHITE)
 
-                || (front_top_right == WHITE && right_top_left == right_middle && up_bottom_right == front_middle)
-                || (front_top_right == WHITE && right_top_left == front_middle && up_bottom_right == right_middle)
+                || (faces[0].colors[0][2].color == WHITE && faces[5].colors[0][0].color == faces[5].colors[1][1].color && faces[3].colors[2][2].color == faces[0].colors[1][1].color)
+                || (faces[0].colors[0][2].color == WHITE && faces[5].colors[0][0].color == faces[0].colors[1][1].color && faces[3].colors[2][2].color == faces[5].colors[1][1].color)
 
-                || (front_top_right == front_middle && right_top_left == WHITE && up_bottom_right == right_middle)  ){// green and red faces
+                || (faces[0].colors[0][2].color == faces[0].colors[1][1].color && faces[5].colors[0][0].color == WHITE && faces[3].colors[2][2].color == faces[5].colors[1][1].color)  ){// green and red faces
                 //All the possible combinations on face UP
 
                 run_move("R' D' R D", faces);
                 }
-            else if(   (right_top_left == WHITE && front_top_right != right_middle && up_bottom_right != front_middle)
-                    || (right_top_left == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
+            else if(   (faces[5].colors[0][0].color == WHITE && faces[0].colors[0][2].color != faces[5].colors[1][1].color && faces[3].colors[2][2].color != faces[0].colors[1][1].color)
+                    || (faces[5].colors[0][0].color == WHITE && faces[0].colors[0][2].color != faces[0].colors[1][1].color && faces[3].colors[2][2].color != faces[5].colors[1][1].color)
 
-                    || (front_top_right == WHITE && right_top_left != right_middle && up_bottom_right != front_middle)
-                    || (front_top_right == WHITE && right_top_left != front_middle && up_bottom_right != right_middle)
+                    || (faces[0].colors[0][2].color == WHITE && faces[5].colors[0][0].color != faces[5].colors[1][1].color && faces[3].colors[2][2].color != faces[0].colors[1][1].color)
+                    || (faces[0].colors[0][2].color == WHITE && faces[5].colors[0][0].color != faces[0].colors[1][1].color && faces[3].colors[2][2].color != faces[5].colors[1][1].color)
 
-                    || (up_bottom_right == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
-                    || (up_bottom_right == WHITE && front_top_right != front_middle && right_top_left != right_middle)  ){// green and red faces
+                    || (faces[3].colors[2][2].color == WHITE && faces[0].colors[0][2].color != faces[0].colors[1][1].color && faces[3].colors[2][2].color != faces[5].colors[1][1].color)
+                    || (faces[3].colors[2][2].color == WHITE && faces[0].colors[0][2].color != faces[0].colors[1][1].color && faces[5].colors[0][0].color != faces[5].colors[1][1].color)  ){// green and red faces
                 run_move("R' D' R", faces);
             }
             else{
@@ -187,7 +187,6 @@ void place_white_corners(Face faces[6]) {
     }
     run_move("Y'", faces);
 }
-
 
 void solve_crown(Face faces[6]) {
     run_move("ZZ", faces);
@@ -225,14 +224,16 @@ void make_yellow_cross(Face faces[6]) {
         return;
 
     // Yellow L
+    bool done_l = false;
     for (int i = 0; i < 4; i++) {
-        if (faces[2].colors[0][1].color == YELLOW && faces[2].colors[1][0].color == YELLOW) {
+        if (!done_l && faces[2].colors[0][1].color == YELLOW && faces[2].colors[1][0].color == YELLOW) {
             run_move("ZZYY R' U' F' U F R YYZZ", faces);
-            reorient_cube(faces);
-            return;
+            done_l = true;
         }
         run_move("Y", faces);
     }
+    if (done_l)
+        return;
 
     // Yellow horrizontal line
     if (faces[2].colors[1][0].color == YELLOW && faces[2].colors[1][2].color == YELLOW)
