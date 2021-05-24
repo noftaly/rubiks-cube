@@ -12,6 +12,12 @@ bool has_white_cross(Face faces[6]) {
         && faces[3].main_color == WHITE;
 }
 
+bool has_white_face(Face faces[6]) {
+    return faces[3].colors[0][0].color == WHITE && faces[3].colors[0][1].color == WHITE && faces[3].colors[0][2].color == WHITE
+        && faces[3].colors[1][0].color == WHITE && faces[3].colors[1][1].color == WHITE && faces[3].colors[1][2].color == WHITE
+        && faces[3].colors[2][0].color == WHITE && faces[3].colors[2][1].color == WHITE && faces[3].colors[2][2].color == WHITE;
+}
+
 bool has_crown(Face faces[6]) {
     for (int i = 0; i < 6; i++) {
         if (i == 2 || i == 3) continue;
@@ -47,6 +53,14 @@ bool has_perfect_yellow_cross(Face faces[6]) {
         && faces[5].colors[2][1].color == faces[5].main_color;
 }
 
+bool includes(Color arr[3], Color value) {
+    for (int i = 0; i < 3; i++) {
+        if (arr[i] == value)
+            return true;
+    }
+    return false;
+}
+
 int get_next_face(int index) {
     switch(index) {
         case 0: return 5;
@@ -57,7 +71,7 @@ int get_next_face(int index) {
     }
 }
 
-int get_previous_face(int index){
+int get_previous_face(int index) {
     switch(index) {
         case 0: return 4;
         case 1: return 5;
@@ -67,7 +81,56 @@ int get_previous_face(int index){
     }
 }
 
-void make_perfect_white_cross(Face faces[6]) {
+
+void rise_white_edge(Face faces[6], int iteration) {
+    if (iteration > 20) {
+        puts("\e[1;31mUnsupported edge-case for white cross...");
+        return;
+    }
+    // If a cube is below
+    if (faces[2].colors[0][1].color == WHITE)
+        run_move("FF", faces);
+    // Of a cube is on the left
+    else if (faces[4].colors[1][2].color == WHITE)
+        run_move("F", faces);
+    // If a cube is on the right
+    else if (faces[5].colors[1][0].color == WHITE)
+        run_move("F'", faces);
+    // If a cube is on the front face, at the bottom
+    else if (faces[0].colors[2][1].color == WHITE)
+        run_move("F' U' R U", faces);
+    // If a cube is on the front face, at the right
+    else if (faces[0].colors[1][2].color == WHITE)
+        run_move("U' R U", faces);
+    // If a cube is on the front face, at the left
+    else if (faces[0].colors[1][0].color == WHITE)
+        run_move("F F U' R U", faces);
+    // If a cube is on the front face, at the top
+    else if (faces[0].colors[0][1].color == WHITE)
+        run_move("F U' R U", faces);
+    else {
+        run_move("D", faces);
+        rise_white_edge(faces, iteration + 1);
+    }
+}
+
+void make_white_cross(Face faces[6]) {
+    if (faces[3].main_color != WHITE) {
+        puts("White is not on top of the cube. TODO: Move it there.");
+        return;
+    }
+    if (has_white_cross(faces))
+        return;
+
+    for (int i = 0; i < 4; i++) {
+        if (faces[3].colors[2][1].color != WHITE)
+            rise_white_edge(faces, 0);
+        run_move("Y", faces);
+    }
+}
+
+void place_white_edges(Face faces[6]) {
+    // 0=front, 1=back, 2=down, 3=up, 4=left, 5=right
     if (faces[3].main_color != WHITE) {
         puts("White is not on top of the cube. TODO: Move it there.");
         return;
@@ -75,108 +138,59 @@ void make_perfect_white_cross(Face faces[6]) {
     if (has_perfect_white_cross(faces))
         return;
 
-    bool has_half_cross = faces[3].colors[0][1].color == WHITE
-        && faces[3].colors[1][0].color == WHITE
-        && faces[3].colors[1][2].color == WHITE
-        && faces[4].colors[0][1].color == faces[4].main_color
-        && faces[5].colors[0][1].color == faces[5].main_color
-        && faces[1].colors[0][1].color == faces[1].main_color;
+    while (faces[0].colors[0][1].color != faces[0].main_color)
+        run_move("U", faces);
 
-    for (int i = 0; i < 4; i++) {
-        // If we have 3 out of 4 white edges placed, and the fourth edge is inversed
-        if (has_half_cross
-            && faces[0].colors[0][1].color == WHITE
-            && faces[3].colors[2][1].color == faces[0].main_color)
-            run_move("F U' R U", faces);
-        // If we have 3 out of 4 white edges placed, and the fourth one is on the front face at the bottom
-        else if (has_half_cross && faces[0].colors[2][1].color == WHITE)
-            run_move("F' R' D' R F F", faces);
-        // If we have 3 out of 4 white edges placed, and the fourth one is on the from face on the right
-        else if (has_half_cross
-            && faces[0].colors[1][2].color == WHITE
-            && faces[5].colors[1][0].color == faces[0].main_color)
-            run_move("R' D' R F F", faces);
-        // Mirror of the previous
-        else if (has_half_cross
-            && faces[0].colors[1][0].color == WHITE
-            && faces[4].colors[1][2].color == faces[0].main_color)
-            run_move("L D L' F F", faces);
-        // If an edge piece is on the upper face on the bottom, inversed, and on the left of its main face
-        else if (faces[3].colors[2][1].color == faces[5].main_color
-            && faces[0].colors[0][1].color == faces[3].main_color)
-            run_move("F R", faces);
-        // If an edge piece is on the upper face on the right, inversed and at the opposite of its main face
-        else if (faces[3].colors[1][2].color == faces[4].main_color
-            && faces[5].colors[0][1].color == WHITE)
-            run_move("R' F' U", faces);
-        // Mirror of the previous
-        else if (faces[3].colors[1][0].color == faces[5].main_color
-            && faces[4].colors[0][1].color == WHITE)
-            run_move("L F U'", faces);
-        // If the part is upside down
-        else if (faces[0].colors[2][1].color == faces[0].main_color
-            && faces[2].colors[0][1].color == WHITE)
-            run_move("FF", faces);
+    while (!has_perfect_white_cross(faces)) {
         run_move("Y", faces);
+        if (faces[0].colors[0][1].color == faces[0].main_color)
+            continue;
+        if (faces[5].colors[0][1].color == faces[0].main_color)
+            run_move("F F D R R D' F F", faces);
+        else if (faces[1].colors[0][1].color == faces[0].main_color)
+            run_move("F F D D B B D D F F", faces);
     }
 }
 
 void place_white_corners(Face faces[6]) {
-
-    while (faces[3].colors[0][0].color != WHITE || faces[3].colors[0][1].color != WHITE || faces[3].colors[0][2].color != WHITE
-        || faces[3].colors[1][0].color != WHITE || faces[3].colors[1][1].color != WHITE || faces[3].colors[1][2].color != WHITE
-        || faces[3].colors[2][0].color != WHITE || faces[3].colors[2][1].color != WHITE || faces[3].colors[2][2].color != WHITE) {
-
-        for (int i = 0; i<8; i++){
+    while (!has_white_face(faces)) {
+        for (int i = 0; i < 8; i++){
             Color front_top_right = faces[0].colors[0][2].color;
             Color front_middle = faces[0].colors[1][1].color;
             Color front_bottom_right = faces[0].colors[2][2].color;
-
             Color right_top_left = faces[5].colors[0][0].color;
             Color right_middle = faces[5].colors[1][1].color;
             Color right_bottom_left = faces[5].colors[2][0].color;
-
             Color up_bottom_right = faces[3].colors[2][2].color;
-
             Color down_top_right = faces[2].colors[0][2].color;
+            // 0=front, 1=back, 2=down, 3=up, 4=left, 5=right
 
-            if (   (front_bottom_right == right_middle && right_bottom_left == WHITE && down_top_right == front_middle)
-                || (front_bottom_right == right_middle && right_bottom_left == front_middle && down_top_right == WHITE)
+            bool is_down_valid = false;
+            bool is_up_valid = false;
+            int faces_matrix[6][3] = { { 5, 3, 0 }, { 5, 0, 3 }, { 3, 5, 0 }, { 3, 0, 5 }, { 0, 3, 5 }, { 0, 5, 3 } };
+            for (int j = 0; j < 6; j++)
+                is_down_valid = is_down_valid || (front_bottom_right == faces[faces_matrix[j][0]].main_color && right_bottom_left == faces[faces_matrix[j][1]].main_color && down_top_right == faces[faces_matrix[j][2]].main_color);
 
-                || (front_bottom_right == WHITE && right_bottom_left == right_middle && down_top_right  == front_middle)
-                || (front_bottom_right == WHITE && right_bottom_left == front_middle && down_top_right  == right_middle)
+            for (int j = 0; j < 5; j++)
+                is_up_valid = is_up_valid || (front_top_right == faces[faces_matrix[j][0]].main_color && right_top_left == faces[faces_matrix[j][1]].main_color && up_bottom_right == faces[faces_matrix[j][2]].main_color);
 
-                || (front_bottom_right == front_middle && right_bottom_left == right_middle && down_top_right  == WHITE)
-                || (front_bottom_right == front_middle && right_bottom_left == WHITE && down_top_right  == right_middle)  // green and red faces
-                //All the possible combinations on face DOWN
-
-                || (front_top_right == right_middle && right_top_left == WHITE && up_bottom_right == front_middle)
-                || (front_top_right == right_middle && right_top_left == front_middle && up_bottom_right == WHITE)
-
-                || (front_top_right == WHITE && right_top_left == right_middle && up_bottom_right == front_middle)
-                || (front_top_right == WHITE && right_top_left == front_middle && up_bottom_right == right_middle)
-
-                || (front_top_right == front_middle && right_top_left == WHITE && up_bottom_right == right_middle)  ){// green and red faces
-                //All the possible combinations on face UP
-
+            if (is_down_valid || is_up_valid) {
                 run_move("R' D' R D", faces);
-                }
-            else if(   (right_top_left == WHITE && front_top_right != right_middle && up_bottom_right != front_middle)
-                    || (right_top_left == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
+            } else if (
+                   (right_top_left == WHITE && front_top_right != right_middle && up_bottom_right != front_middle)
+                || (right_top_left == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
 
-                    || (front_top_right == WHITE && right_top_left != right_middle && up_bottom_right != front_middle)
-                    || (front_top_right == WHITE && right_top_left != front_middle && up_bottom_right != right_middle)
+                || (front_top_right == WHITE && right_top_left != right_middle && up_bottom_right != front_middle)
+                || (front_top_right == WHITE && right_top_left != front_middle && up_bottom_right != right_middle)
 
-                    || (up_bottom_right == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
-                    || (up_bottom_right == WHITE && front_top_right != front_middle && right_top_left != right_middle)  ){// green and red faces
+                || (up_bottom_right == WHITE && front_top_right != front_middle && up_bottom_right != right_middle)
+                || (up_bottom_right == WHITE && front_top_right != front_middle && right_top_left != right_middle)) {
                 run_move("R' D' R", faces);
-            }
-            else{
+            } else {
                 run_move("D", faces);
             }
-
         }
-        run_move("Y", faces);        
+        run_move("Y", faces);
     }
     run_move("Y'", faces);
 }
@@ -263,14 +277,6 @@ void place_yellow_edges(Face faces[6]) {
         }
         run_move("Y", faces);
     }
-}
-
-bool includes(Color arr[3], Color value) {
-    for (int i = 0; i < 3; i++) {
-        if (arr[i] == value)
-            return true;
-    }
-    return false;
 }
 
 void place_yellow_corners(Face faces[6]) {
