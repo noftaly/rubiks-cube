@@ -13,12 +13,7 @@ typedef enum {
 } Color;
 
 typedef struct {
-    Color color;
-} Cube;
-
-typedef struct {
-    Cube colors[3][3];
-    Color main_color;
+    Color colors[3][3];
 } Face;
 
 void create_face(Face*, Color);

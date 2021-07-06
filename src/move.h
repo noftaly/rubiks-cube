@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "rubiks.h"
 
-void swap_cubes(Cube*, Cube*);
+void swap_cubes(Color*, Color*);
 void rotate_main_face(Face*);
 
 void rotate_front(Face[6]);

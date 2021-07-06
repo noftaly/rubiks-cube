@@ -8,9 +8,8 @@
 void create_face(Face* face, Color color) {
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++)
-            face->colors[row][col] = (Cube){ .color = color };
+            face->colors[row][col] = color;
     }
-    face->main_color = color;
 }
 
 void run_move(const char* move, Face faces[6]) {
@@ -108,7 +107,7 @@ Color ask_color(Face faces[6], int row, int col, int color_counter[9]) {
     }
     if (row == 1 && col == 1){
         for (int i = 0; i < 6; i++) {
-            while (faces[i].colors[row][col].color == clr) {
+            while (faces[i].colors[row][col] == clr) {
                 puts("\e[0;31mInvalid color.\e[0m Already center of another face. Please retry:");
                 return ask_color(faces, row, col, color_counter);
             }
@@ -161,9 +160,9 @@ void define_cube(Face faces[6]) {
 
         // 4. Act accordinly
         color_counter[clr]--;
-        faces[face_index].colors[row][col].color = clr;
+        faces[face_index].colors[row][col] = clr;
         if (row == 1 && col == 1)
-            faces[face_index].main_color = clr;
+            faces[face_index].colors[1][1] = clr;
     }
 }
 
@@ -241,7 +240,7 @@ void scramble_cube(Face faces[6]) {
 }
 
 void reorient_cube(Face faces[6]) {
-    switch (faces[0].main_color) {
+    switch (faces[0].colors[1][1]) {
         case BLUE:
             run_move("Y Y", faces);
             return;

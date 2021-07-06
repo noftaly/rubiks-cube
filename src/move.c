@@ -4,8 +4,8 @@
 #include "rubiks.h"
 #include "move.h"
 
-void swap_cubes(Cube* source, Cube* dest) {
-    Cube temp = *source;
+void swap_cubes(Color* source, Color* dest) {
+    Color temp = *source;
     *source = *dest;
     *dest = temp;
 }
@@ -68,7 +68,7 @@ void rotate_down(Face faces[6]) {
 }
 
 void rotate_back(Face faces[6]) {
-    Cube temp;
+    Color temp;
 
     // Rotate top corner
     temp = faces[3].colors[0][0];
